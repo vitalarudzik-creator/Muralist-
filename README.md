@@ -1,5 +1,5 @@
-# ОХРА — сайт мурал-студии
+# OHRA Mural Studio
 
-Лендинг для художника-мураліста: росписи стен, фасадов и заборов на заказ.
+Landing page for a muralist who paints custom murals on walls, facades and fences.
 
-Сайт: https://vitalarudzik-creator.github.io/Muralist-/
+Live site: https://vitalarudzik-creator.github.io/Muralist-/
