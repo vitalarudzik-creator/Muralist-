@@ -894,7 +894,17 @@ function sel(b){var el=b.previousElementSibling;var rg=document.createRange();rg
 (function(){
   var cv=document.getElementById("tw-canvas"),ctx=cv.getContext("2d"),box=document.getElementById("tw-designs");
   var wall=null,design=null,pos={x:.5,y:.45},size=.55,op=.92,real=true,preview=null;
-  function sample(){var c=document.createElement("canvas");c.width=1200;c.height=900;var g=c.getContext("2d");STY.wall(g,1200,900,rng(77));return c}
+  function sample(){var c=document.createElement("canvas"),W=1200,H=900;c.width=W;c.height=H;var g=c.getContext("2d"),r=rng(77);
+    /* typical white drywall interior: soft light from the left, baseboard, oak floor, outlet */
+    var fl=H*.8,lg=g.createLinearGradient(0,0,W,0);lg.addColorStop(0,"#FBFBF9");lg.addColorStop(.55,"#F2F2EE");lg.addColorStop(1,"#E4E4DF");g.fillStyle=lg;g.fillRect(0,0,W,fl);
+    var vg=g.createLinearGradient(0,0,0,fl);vg.addColorStop(0,"rgba(0,0,0,.05)");vg.addColorStop(.25,"rgba(0,0,0,0)");vg.addColorStop(1,"rgba(0,0,0,.04)");g.fillStyle=vg;g.fillRect(0,0,W,fl);
+    for(var i=0;i<4000;i++){g.fillStyle="rgba(0,0,0,"+(r()*.025)+")";g.fillRect(r()*W,r()*fl,1.5,1.5)}
+    g.fillStyle="#FFFFFF";g.fillRect(0,fl-46,W,46);g.fillStyle="rgba(0,0,0,.08)";g.fillRect(0,fl-46,W,3);g.fillStyle="rgba(0,0,0,.12)";g.fillRect(0,fl-2,W,2);
+    for(var y=fl,k=0;y<H;y+=24,k++){for(var x=-(k*137%300);x<W;x+=300){g.fillStyle="hsl(32,"+(38+r()*10)+"%,"+(58+r()*10)+"%)";g.fillRect(x,y,299,23)}}
+    var fg=g.createLinearGradient(0,fl,0,H);fg.addColorStop(0,"rgba(0,0,0,.18)");fg.addColorStop(.3,"rgba(0,0,0,0)");g.fillStyle=fg;g.fillRect(0,fl,W,H-fl);
+    g.fillStyle="#FFFFFF";g.strokeStyle="rgba(0,0,0,.18)";g.lineWidth=2;g.fillRect(W*.86,fl-120,34,54);g.strokeRect(W*.86,fl-120,34,54);
+    g.fillStyle="rgba(0,0,0,.35)";g.fillRect(W*.86+11,fl-108,3,9);g.fillRect(W*.86+20,fl-108,3,9);g.fillRect(W*.86+11,fl-84,3,9);g.fillRect(W*.86+20,fl-84,3,9);
+    return c}
   function makeDesign(w){var c=document.createElement("canvas");c.width=800;c.height=600;var g=c.getContext("2d");(STY[w.style])(g,800,600,rng(w.seed*9973),w.word);return c}
   wall=sample();
   var designs=WORKS.map(function(w){return {name:w.t,img:makeDesign(w)}});
