@@ -1,0 +1,829 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ОХРА — мурал-студия</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Росписи стен, фасадов и заборов на заказ в Киеве. Бесплатный эскиз, фиксированная цена, гарантия 5 лет.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800&family=Manrope:wght@400;500;600;700&display=swap">
+<style>
+/* Layout: оштукатуренная стена как фон, охра — единственный акцент действия; каждый экран заканчивается шагом к заявке */
+:root{
+  --bg:#ECEDE9; --surface:#F8F8F5; --ink:#16181B; --muted:#5A5F64; --line:#D2D4CE;
+  --ochre:#E2A31C; --ochre-ink:#16181B; --cobalt:#2743D6; --ok:#1F8A55; --err:#C73A2B;
+  --shadow:0 18px 40px -24px rgba(22,24,27,.45);
+  --f-display:"Unbounded","Arial Black",system-ui,sans-serif;
+  --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --r:14px; --max:1180px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#111315; --surface:#1A1D20; --ink:#ECEDE8; --muted:#9BA1A6; --line:#2B2F33;
+  --ochre:#EDB02E; --ochre-ink:#16181B; --cobalt:#7389FF; --ok:#3CC481; --err:#FF6B5B;
+  --shadow:0 18px 40px -24px rgba(0,0,0,.8); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111315; --surface:#1A1D20; --ink:#ECEDE8; --muted:#9BA1A6; --line:#2B2F33;
+  --ochre:#EDB02E; --ochre-ink:#16181B; --cobalt:#7389FF; --ok:#3CC481; --err:#FF6B5B;
+  --shadow:0 18px 40px -24px rgba(0,0,0,.8); color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;margin:0;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--bg)}
+a{color:inherit}
+h1,h2,h3{font-family:var(--f-display);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h2{font-size:clamp(25px,4.2vw,46px);font-weight:700;overflow-wrap:break-word}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+section{padding-block:clamp(64px,9vw,112px)}
+.eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
+.eyebrow::before{content:"";width:22px;height:3px;background:var(--ochre);border-radius:2px}
+.lead{color:var(--muted);font-size:18px;max-width:60ch}
+.sec-head{display:grid;gap:14px;margin-bottom:40px;max-width:760px}
+:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px;border-radius:6px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font:700 16px/1 var(--f-body);padding:17px 26px;border-radius:999px;border:2px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s ease,background .15s ease,box-shadow .15s ease;white-space:nowrap}
+.btn:active{transform:translateY(1px)}
+.btn-main{background:var(--ochre);color:var(--ochre-ink);box-shadow:0 10px 24px -12px color-mix(in srgb,var(--ochre) 80%,transparent)}
+.btn-main:hover{transform:translateY(-2px);box-shadow:0 16px 30px -14px color-mix(in srgb,var(--ochre) 90%,transparent)}
+.btn-ghost{border-color:var(--ink);color:var(--ink);background:transparent}
+.btn-ghost:hover{background:var(--ink);color:var(--bg)}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:24px;height:68px}
+.logo{font:800 22px/1 var(--f-display);text-decoration:none;display:flex;align-items:center;gap:10px;letter-spacing:.02em}
+.logo i{width:26px;height:26px;border-radius:50% 50% 50% 4px;background:var(--ochre);display:block;transform:rotate(-12deg)}
+.logo small{font:600 11px/1.2 var(--f-body);color:var(--muted);letter-spacing:.04em;text-transform:uppercase;max-width:90px}
+.nav{display:flex;gap:22px;margin-left:auto}
+.nav a{text-decoration:none;font-weight:600;font-size:15px;color:var(--muted)}
+.nav a:hover{color:var(--ink)}
+.top-phone{font-weight:700;text-decoration:none;font-size:15px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.top-phone span{display:block;font-size:11px;font-weight:600;color:var(--ok);letter-spacing:.02em}
+.top .btn{padding:12px 18px;font-size:14px}
+@media (max-width:980px){.nav{display:none}.top-phone{margin-left:auto}}
+@media (max-width:560px){.top .btn{display:none}.logo small{display:none}}
+
+/* hero */
+.hero{padding-block:clamp(36px,6vw,72px) clamp(56px,8vw,96px)}
+.hero .wrap{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,5vw,64px);align-items:center}
+.hero-copy{display:grid;gap:24px;min-width:0}
+.badge{display:inline-flex;align-items:center;gap:8px;background:var(--surface);border:1px solid var(--line);padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600;width:fit-content}
+.badge b{width:8px;height:8px;border-radius:50%;background:var(--ok);box-shadow:0 0 0 4px color-mix(in srgb,var(--ok) 25%,transparent)}
+.hero h1{font-size:clamp(27px,4.4vw,56px);font-weight:800;overflow-wrap:break-word}
+.hero h1 em{font-style:normal;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--ochre) 75%,transparent) 62%,color-mix(in srgb,var(--ochre) 75%,transparent) 92%,transparent 92%)}
+.hero .lead{font-size:19px}
+.hero-cta{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.hero-note{font-size:14px;color:var(--muted);display:flex;gap:18px;flex-wrap:wrap}
+.hero-note span{display:flex;gap:6px;align-items:center}
+.hero-note svg{width:16px;height:16px;color:var(--ok)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border-top:1px solid var(--line);padding-top:22px;margin-top:6px}
+.stats div{display:grid;gap:2px}
+.stats div+div{border-left:1px solid var(--line);padding-left:14px}
+.stats div{min-width:0}
+.stats strong{font:700 clamp(20px,3vw,32px)/1 var(--f-display);font-variant-numeric:tabular-nums}
+.stats span{font-size:14px;color:var(--muted)}
+
+.ba{position:relative;aspect-ratio:4/5;max-width:100%;border-radius:22px;overflow:hidden;box-shadow:var(--shadow);background:#888;user-select:none;touch-action:pan-y}
+.ba canvas{position:absolute;inset:0;width:100%;height:100%;display:block}
+.ba .before{clip-path:inset(0 calc(100% - var(--pos,45%)) 0 0)}
+.ba input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;z-index:3}
+.ba .handle{position:absolute;top:0;bottom:0;left:var(--pos,45%);width:3px;margin-left:-1.5px;background:#fff;z-index:2;pointer-events:none}
+.ba .handle::after{content:"";position:absolute;top:50%;left:50%;width:46px;height:46px;transform:translate(-50%,-50%);border-radius:50%;background:#fff;box-shadow:0 6px 18px rgba(0,0,0,.35);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2316181B' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E");background-size:22px;background-repeat:no-repeat;background-position:center}
+.ba .tag{position:absolute;top:16px;z-index:2;pointer-events:none;background:rgba(15,17,19,.72);color:#fff;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;letter-spacing:.04em}
+.ba .tag.l{left:16px}.ba .tag.r{right:16px;background:var(--ochre);color:var(--ochre-ink)}
+.ba-cap{position:absolute;left:16px;right:16px;bottom:16px;z-index:2;pointer-events:none;background:rgba(15,17,19,.72);color:#fff;border-radius:12px;padding:12px 14px;font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ba-cap b{font-weight:700}
+@media (max-width:900px){.hero .wrap{grid-template-columns:minmax(0,1fr)}.ba{aspect-ratio:4/3.4}}
+
+/* clients */
+.clients{padding-block:28px;border-block:1px solid var(--line)}
+.clients .wrap{display:flex;align-items:center;gap:clamp(20px,4vw,48px);flex-wrap:wrap;justify-content:space-between}
+.clients p{font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+.clients span{font-family:var(--f-display);font-weight:700;font-size:18px;color:var(--muted);opacity:.85;white-space:nowrap}
+
+/* surfaces */
+.surf{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.surf a{display:grid;gap:10px;padding:24px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);text-decoration:none;transition:border-color .15s,transform .15s}
+.surf a:hover{border-color:var(--ink);transform:translateY(-2px)}
+.surf .ico{width:44px;height:44px;border-radius:12px;background:color-mix(in srgb,var(--ochre) 22%,transparent);display:grid;place-items:center;color:var(--ink)}
+.surf .ico svg{width:24px;height:24px}
+.surf p{color:var(--muted);font-size:15px}
+.surf .price{font-weight:700;font-size:15px;color:var(--ink);font-variant-numeric:tabular-nums}
+@media (max-width:900px){.surf{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.surf{grid-template-columns:1fr}}
+
+/* portfolio */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.chip{font:600 15px/1 var(--f-body);padding:11px 16px;border-radius:999px;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"],.chip.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{all:unset;box-sizing:border-box;cursor:pointer;display:grid;gap:12px;min-width:0}
+.card .pic{position:relative;aspect-ratio:4/3;max-width:100%;border-radius:var(--r);overflow:hidden;background:var(--line)}
+.card canvas{width:100%;height:100%;display:block;transition:transform .5s ease}
+.card:hover canvas{transform:scale(1.04)}
+.card .more{position:absolute;right:12px;bottom:12px;background:var(--surface);color:var(--ink);font-size:13px;font-weight:700;padding:8px 12px;border-radius:999px;opacity:0;transform:translateY(6px);transition:.2s}
+.card:hover .more,.card:focus-visible .more{opacity:1;transform:none}
+.card h3{font-size:17px}
+.card .meta{display:flex;gap:14px;color:var(--muted);font-size:14px;flex-wrap:wrap;font-variant-numeric:tabular-nums}
+.card[hidden]{display:none!important}
+@media (max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:560px){.grid{grid-template-columns:1fr}}
+
+.inline-cta{margin-top:40px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:24px 28px;border-radius:var(--r);border:1.5px dashed var(--muted)}
+.inline-cta p{font-weight:600;font-size:18px;max-width:52ch}
+.inline-cta p span{display:block;font-weight:500;font-size:15px;color:var(--muted)}
+
+/* process */
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:0;counter-reset:s;position:relative}
+.step{padding:0 18px 0 0;display:grid;gap:10px;align-content:start;position:relative}
+.step::before{counter-increment:s;content:counter(s);font:800 16px/1 var(--f-display);width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--surface);border:2px solid var(--ink);position:relative;z-index:1}
+.step:first-child::before{background:var(--ochre);border-color:var(--ochre);color:var(--ochre-ink)}
+.step::after{content:"";position:absolute;top:21px;left:44px;right:0;height:2px;background:repeating-linear-gradient(90deg,var(--line) 0 8px,transparent 8px 14px)}
+.step:last-child::after{display:none}
+.step p{color:var(--muted);font-size:15px}
+.step .when{font-size:13px;font-weight:700;color:var(--cobalt);letter-spacing:.02em}
+@media (max-width:900px){.steps{grid-template-columns:1fr;gap:26px}.step{grid-template-columns:44px 1fr;column-gap:16px;padding:0}.step>*{grid-column:2}.step::before{grid-row:1/span 3;grid-column:1}.step::after{top:44px;left:21px;right:auto;width:2px;height:calc(100% - 18px);background:repeating-linear-gradient(180deg,var(--line) 0 8px,transparent 8px 14px)}}
+
+/* pricing + calculator */
+.price-wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:28px;align-items:start}
+.tiers{display:grid;gap:12px}
+.tier{display:grid;grid-template-columns:1fr auto;gap:6px 16px;padding:20px 22px;border-radius:var(--r);border:1px solid var(--line);background:var(--surface)}
+.tier h3{font-size:17px}
+.tier .p{font:700 20px/1 var(--f-display);font-variant-numeric:tabular-nums;white-space:nowrap;text-align:right}
+.tier .p small{font:500 13px var(--f-body);color:var(--muted);display:block;margin-top:4px}
+.tier p{color:var(--muted);font-size:15px;grid-column:1/-1}
+.incl{margin-top:8px;display:grid;gap:8px;font-size:15px}
+.incl li{display:flex;gap:10px;align-items:flex-start;list-style:none}
+.incl ul{padding:0;margin:0;display:grid;gap:8px}
+.incl svg{width:18px;height:18px;color:var(--ok);flex:none;margin-top:3px}
+
+.calc{background:var(--ink);color:var(--bg);border-radius:22px;padding:clamp(22px,3.5vw,36px);display:grid;gap:22px;box-shadow:var(--shadow)}
+.calc h3{font-size:22px}
+.calc label,.calc .lbl{font-weight:700;font-size:14px;letter-spacing:.02em;display:flex;justify-content:space-between;gap:10px}
+.calc .lbl output{font:700 18px var(--f-display);color:var(--ochre);font-variant-numeric:tabular-nums}
+.calc input[type=range]{width:100%;accent-color:var(--ochre);margin:10px 0 0;height:28px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px}
+.seg.two{grid-template-columns:repeat(2,1fr)}
+.seg input{position:absolute;opacity:0;pointer-events:none}
+.seg label{min-width:0;overflow-wrap:anywhere;display:grid;gap:3px;padding:12px;border-radius:12px;border:1.5px solid color-mix(in srgb,var(--bg) 25%,transparent);cursor:pointer;font-weight:700;font-size:14px;letter-spacing:0}
+.seg label small{font-weight:500;font-size:12.5px;opacity:.7}
+.seg input:checked+label{border-color:var(--ochre);background:color-mix(in srgb,var(--ochre) 16%,transparent)}
+.seg input:focus-visible+label{outline:3px solid var(--ochre);outline-offset:2px}
+.result{border-top:1px solid color-mix(in srgb,var(--bg) 20%,transparent);padding-top:20px;display:grid;gap:6px}
+.result .sum{font:800 clamp(28px,4vw,40px)/1.05 var(--f-display);font-variant-numeric:tabular-nums}
+.result .sub{opacity:.75;font-size:15px}
+.calc .btn{width:100%}
+.calc .fine{font-size:13px;opacity:.6;text-align:center}
+@media (max-width:900px){.price-wrap{grid-template-columns:minmax(0,1fr)}}
+.calc>*,.tiers,.lead-grid>*{min-width:0}
+@media (max-width:420px){.seg{grid-template-columns:1fr}}
+
+/* guarantee */
+.guar{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.guar div{padding:22px;border-top:3px solid var(--ink);display:grid;gap:8px;align-content:start}
+.guar strong{font:700 26px/1 var(--f-display)}
+.guar p{color:var(--muted);font-size:15px}
+@media (max-width:900px){.guar{grid-template-columns:repeat(2,1fr)}}
+@media (max-width:480px){.guar{grid-template-columns:1fr}}
+
+/* about */
+.about .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(28px,5vw,64px);align-items:center}
+.portrait{aspect-ratio:4/5;max-width:100%;border-radius:22px;overflow:hidden;position:relative;background:var(--line)}
+.portrait canvas{width:100%;height:100%;display:block}
+.portrait figcaption{position:absolute;left:14px;bottom:14px;background:var(--surface);color:var(--ink);padding:10px 14px;border-radius:12px;font-size:14px;font-weight:600}
+.about-copy{display:grid;gap:18px;min-width:0}
+.about-copy p{color:var(--muted)}
+.about-copy blockquote{margin:0;font:600 20px/1.4 var(--f-body);border-left:3px solid var(--ochre);padding-left:18px;color:var(--ink)}
+@media (max-width:900px){.about .wrap{grid-template-columns:1fr}.portrait{aspect-ratio:4/3}}
+
+/* reviews */
+.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rev{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:24px;display:grid;gap:16px;align-content:space-between}
+.rev .stars{color:var(--ochre);letter-spacing:2px;font-size:16px}
+.rev p{font-size:16px}
+.rev footer{display:flex;align-items:center;gap:12px;font-size:14px}
+.rev footer i{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:700 15px var(--f-display);font-style:normal;color:#fff;flex:none}
+.rev footer span{color:var(--muted);display:block}
+@media (max-width:900px){.revs{grid-template-columns:1fr}}
+
+/* faq */
+.faq{display:grid;grid-template-columns:.8fr 1.2fr;gap:40px;align-items:start}
+.faq details{border-bottom:1px solid var(--line);padding-block:18px}
+.faq summary{cursor:pointer;font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font:500 24px/1 var(--f-display);transition:transform .2s;flex:none}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--muted);margin-top:10px;max-width:62ch}
+@media (max-width:900px){.faq{grid-template-columns:1fr}}
+
+/* lead form */
+.lead-sec{background:var(--surface);border-top:1px solid var(--line)}
+.lead-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(28px,5vw,64px);align-items:start}
+.lead-grid>*{min-width:0}
+@media (max-width:900px){.lead-grid{grid-template-columns:minmax(0,1fr)}}
+.lead-side{display:grid;gap:22px;min-width:0}
+.lead-side ol{margin:0;padding:0;list-style:none;display:grid;gap:14px;counter-reset:l}
+.lead-side li{display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start;counter-increment:l}
+.lead-side li::before{content:counter(l);width:32px;height:32px;border-radius:50%;background:var(--ink);color:var(--bg);display:grid;place-items:center;font:700 14px var(--f-display)}
+.lead-side li b{display:block}
+.lead-side li span{color:var(--muted);font-size:15px}
+.contacts-alt{display:grid;gap:10px;padding:18px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg)}
+.contacts-alt .row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;font-size:15px}
+.contacts-alt .row b{font-variant-numeric:tabular-nums;user-select:all}
+.copy{font:600 13px var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:6px 10px;border-radius:8px;cursor:pointer}
+
+form.lead{background:var(--bg);border:1px solid var(--line);border-radius:22px;padding:clamp(20px,3.5vw,36px);display:grid;gap:20px;box-shadow:var(--shadow)}
+.calc-note{display:none;gap:10px;align-items:center;background:color-mix(in srgb,var(--ochre) 18%,transparent);border-radius:12px;padding:12px 14px;font-size:14.5px;font-weight:600}
+.calc-note.show{display:flex}
+.fld{display:grid;gap:8px}
+.fld>label,.fld>.lbl{font-weight:700;font-size:15px}
+.fld .opt{font-weight:500;color:var(--muted);font-size:13px}
+.two-col{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.two-col>*{min-width:0}
+@media (max-width:560px){.two-col{grid-template-columns:minmax(0,1fr)}}
+input[type=text],input[type=tel],input[type=number],textarea{font:500 17px var(--f-body);color:var(--ink);background:var(--surface);border:1.5px solid var(--line);border-radius:12px;padding:15px 16px;width:100%;transition:border-color .15s}
+input:focus,textarea:focus{outline:none;border-color:var(--ink)}
+textarea{min-height:92px;resize:vertical}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips label{font:600 14.5px/1 var(--f-body);padding:11px 14px;border-radius:999px;border:1.5px solid var(--line);cursor:pointer;background:var(--surface)}
+.chips input:checked+label{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips input:focus-visible+label{outline:3px solid var(--cobalt);outline-offset:2px}
+.file{position:relative;overflow:hidden;display:flex;gap:12px;align-items:center;padding:14px 16px;border:1.5px dashed var(--line);border-radius:12px;cursor:pointer;font-size:15px;color:var(--muted)}
+.file input{position:absolute;opacity:0;width:1px;height:1px}
+.file svg{width:22px;height:22px;color:var(--ink);flex:none}
+.file:focus-within{border-color:var(--cobalt)}
+.err{color:var(--err);font-size:13.5px;font-weight:600;display:none}
+.fld.bad .err{display:block}
+.fld.bad input{border-color:var(--err)}
+form.lead .btn{width:100%;padding-block:20px;font-size:17px}
+.privacy{font-size:13px;color:var(--muted);text-align:center}
+.done{display:grid;gap:14px;text-align:center;justify-items:center;padding-block:30px}
+.done .tick{width:72px;height:72px;border-radius:50%;background:var(--ok);display:grid;place-items:center;color:#fff}
+.done .tick svg{width:36px;height:36px}
+.done p{color:var(--muted);max-width:42ch}
+
+/* footer */
+footer.site{padding-block:40px 110px;border-top:1px solid var(--line)}
+footer.site .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:14px}
+footer.site b{color:var(--ink)}
+
+/* mobile bar */
+.mbar{position:fixed;left:0;right:0;bottom:0;z-index:55;display:none;gap:10px;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-top:1px solid var(--line);
+  padding:10px max(12px,env(safe-area-inset-right,0px)) calc(10px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+.mbar .btn{flex:1;padding:15px 10px;font-size:15px}
+@media (max-width:760px){.mbar{display:flex}}
+
+/* modal */
+dialog{border:0;padding:0;border-radius:22px;max-width:min(880px,calc(100vw - 32px));width:100%;background:var(--surface);color:var(--ink);box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+dialog::backdrop{background:rgba(10,12,14,.66)}
+.m-pic{aspect-ratio:16/9;max-width:100%;position:relative}
+.m-pic canvas{width:100%;height:100%;display:block}
+.m-body{padding:24px clamp(20px,3vw,32px) 28px;display:grid;gap:14px}
+.m-body .meta{display:flex;gap:10px;flex-wrap:wrap}
+.m-body .meta span{background:var(--bg);border:1px solid var(--line);padding:6px 12px;border-radius:999px;font-size:14px;font-weight:600;font-variant-numeric:tabular-nums}
+.m-body p{color:var(--muted)}
+.m-actions{display:flex;gap:10px;flex-wrap:wrap}
+.m-close{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(15,17,19,.7);color:#fff;font-size:22px;cursor:pointer;z-index:2}
+
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="ОХРА — на главную"><i></i>ОХРА<small>мурал-студия Артёма Левченко</small></a>
+    <nav class="nav" aria-label="Разделы">
+      <a href="#works">Работы</a>
+      <a href="#process">Как работаю</a>
+      <a href="#price">Цены</a>
+      <a href="#reviews">Отзывы</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <a class="top-phone" href="tel:+380671234567">+380 67 123 45 67<span>● На связи до 21:00</span></a>
+    <a class="btn btn-main" href="#lead">Оставить заявку</a>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="badge"><b></b>Свободные даты на декабрь: осталось 3</span>
+      <h1>Превращаю серые стены в&nbsp;<em>то, что фотографируют</em></h1>
+      <p class="lead">Росписи для кафе, офисов, фасадов, заборов и квартир в Киеве и области. Сначала эскиз под вашу стену, потом точная цена. Платите, только если эскиз понравился.</p>
+      <div class="hero-cta">
+        <a class="btn btn-main" href="#calc">Рассчитать стоимость
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="#works">Смотреть работы</a>
+      </div>
+      <div class="hero-note">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Эскиз бесплатно за 48 часов</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Цена в договоре не меняется</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Гарантия 5 лет</span>
+      </div>
+      <div class="stats">
+        <div><strong>140+</strong><span>расписанных стен</span></div>
+        <div><strong>9 лет</strong><span>в монументальной росписи</span></div>
+        <div><strong>4,9★</strong><span>87 отзывов в Google</span></div>
+      </div>
+    </div>
+    <div class="ba" id="ba" style="--pos:46%">
+      <canvas class="after" data-style="waves" data-seed="7"></canvas>
+      <canvas class="before" data-style="wall" data-seed="7"></canvas>
+      <div class="handle"></div>
+      <span class="tag l">ДО</span><span class="tag r">ПОСЛЕ</span>
+      <input type="range" min="0" max="100" value="46" id="ba-range" aria-label="Сравнить стену до и после росписи">
+      <div class="ba-cap"><span><b>Фасад ЖК «Липки»</b> · 180 м²</span><span>21 день под ключ</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="clients">
+  <div class="wrap">
+    <p>Мне доверили стены</p>
+    <span>Зерно</span><span>Nordlane</span><span>Сад&amp;Co</span><span>ЖК Липки</span><span>BeFit</span><span>Kyivstar Hub</span>
+  </div>
+</div>
+
+<section id="surfaces">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Что расписываю</span>
+      <h2>Любая поверхность, где нужна история</h2>
+      <p class="lead">Подбираю краски под материал и условия: кирпич, бетон, штукатурка, металл, дерево. Уличные работы покрываю антивандальным лаком.</p>
+    </div>
+    <div class="surf">
+      <a href="#lead" data-obj="Кафе / ресторан"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5V9zM17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3v3M12 3v3"/></svg></span><h3>Кафе и рестораны</h3><p>Стена, которая попадает в каждую сторис гостей и работает как реклама.</p><span class="price">от 1 400 ₴/м²</span></a>
+      <a href="#lead" data-obj="Офис"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 20V10"/></svg></span><h3>Офисы и шоурумы</h3><p>Ценности бренда на стене переговорной, ресепшена или open space.</p><span class="price">от 1 400 ₴/м²</span></a>
+      <a href="#lead" data-obj="Фасад / забор"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V9l9-6 9 6v12M3 21h18M9 21v-6h6v6"/></svg></span><h3>Фасады зданий</h3><p>Большие форматы с вышки или подъёмника, согласование с ОСББ.</p><span class="price">от 1 700 ₴/м²</span></a>
+      <a href="#lead" data-obj="Фасад / забор"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V7l2-3 2 3v14M10 21V7l2-3 2 3v14M16 21V7l2-3 2 3v14M2 11h20M2 17h20"/></svg></span><h3>Заборы и гаражи</h3><p>Вместо граффити-вандализма — рисунок, который не трогают.</p><span class="price">от 1 200 ₴/м²</span></a>
+      <a href="#lead" data-obj="Квартира / дом"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10l8-6 8 6v10H4zM10 20v-5h4v5"/></svg></span><h3>Квартиры и дома</h3><p>Акцентная стена в гостиной, спальне или на кухне под ваш интерьер.</p><span class="price">от 1 500 ₴/м²</span></a>
+      <a href="#lead" data-obj="Детская"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span><h3>Детские и садики</h3><p>Только гипоаллергенные краски без запаха, можно жить сразу.</p><span class="price">от 1 300 ₴/м²</span></a>
+    </div>
+  </div>
+</section>
+
+<section id="works" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Портфолио</span>
+      <h2>Последние работы</h2>
+      <p class="lead">Нажмите на работу, чтобы увидеть площадь, сроки и стоимость. Понравился стиль — закажите похожее в один клик.</p>
+    </div>
+    <div class="filters" role="group" aria-label="Фильтр работ">
+      <button class="chip" aria-pressed="true" data-f="all">Все</button>
+      <button class="chip" aria-pressed="false" data-f="biz">Бизнес</button>
+      <button class="chip" aria-pressed="false" data-f="out">Фасады и заборы</button>
+      <button class="chip" aria-pressed="false" data-f="home">Квартиры и детские</button>
+    </div>
+    <div class="grid" id="grid"></div>
+    <div class="inline-cta">
+      <p>Не нашли нужный стиль?<span>Пришлите фото стены и пару референсов — предложу 2–3 варианта эскиза бесплатно.</span></p>
+      <a class="btn btn-main" href="#lead">Получить эскиз</a>
+    </div>
+  </div>
+</section>
+
+<section id="process" style="background:var(--surface);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Как работаю</span>
+      <h2>От заявки до готовой стены — 5 шагов</h2>
+      <p class="lead">Вы видите результат до того, как платите. Никаких сюрпризов в смете.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><span class="when">Сегодня</span><h3>Заявка</h3><p>Оставляете контакты и фото стены. Перезваниваю в течение 30 минут.</p></div>
+      <div class="step"><span class="when">1–2 дня</span><h3>Замер и бриф</h3><p>Приезжаю бесплатно по Киеву, обсуждаем идею, бренд и бюджет.</p></div>
+      <div class="step"><span class="when">48 часов</span><h3>Эскиз</h3><p>Рисую эскиз прямо на фото вашей стены. Две правки бесплатно.</p></div>
+      <div class="step"><span class="when">Договор</span><h3>Фикс-цена</h3><p>Цена и сроки в договоре. Предоплата 40% на краски.</p></div>
+      <div class="step"><span class="when">3–21 день</span><h3>Роспись и сдача</h3><p>Пишу, покрываю защитным лаком, убираю за собой. Остаток — после приёмки.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="price">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Цены</span>
+      <h2>Цена за м² зависит от детализации</h2>
+      <p class="lead">Минимальный заказ — 12 000 ₴. В цену входят эскиз, краски, лак, выезд по Киеву и уборка.</p>
+    </div>
+    <div class="price-wrap">
+      <div class="tiers">
+        <div class="tier"><h3>Графика и паттерны</h3><div class="p">1 200 ₴<small>за м²</small></div><p>Геометрия, орнаменты, лэттеринг, логотип в 2–4 цвета.</p></div>
+        <div class="tier"><h3>Иллюстрация</h3><div class="p">2 000 ₴<small>за м²</small></div><p>Сюжет, персонажи, растения, пейзаж в стилизованной манере.</p></div>
+        <div class="tier"><h3>Реализм</h3><div class="p">3 200 ₴<small>за м²</small></div><p>Портреты, фотореалистичные сцены, сложные градиенты и объём.</p></div>
+        <div class="incl">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Эскиз и 2 правки бесплатно</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Профессиональные акриловые краски Montana и Caparol</li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>Работаю официально как ФЛП: договор, акт, безнал</li>
+          </ul>
+        </div>
+      </div>
+
+      <form class="calc" id="calc" onsubmit="return false" aria-label="Калькулятор стоимости">
+        <h3>Калькулятор стоимости</h3>
+        <div>
+          <div class="lbl"><label for="c-area">Площадь стены</label><output id="c-area-out">20 м²</output></div>
+          <input type="range" id="c-area" min="4" max="250" step="1" value="20">
+        </div>
+        <div>
+          <span class="lbl">Детализация</span>
+          <div class="seg">
+            <input type="radio" name="c-lvl" id="c-l1" value="1200"><label for="c-l1">Графика<small>1 200 ₴/м²</small></label>
+            <input type="radio" name="c-lvl" id="c-l2" value="2000" checked><label for="c-l2">Иллюстрация<small>2 000 ₴/м²</small></label>
+            <input type="radio" name="c-lvl" id="c-l3" value="3200"><label for="c-l3">Реализм<small>3 200 ₴/м²</small></label>
+          </div>
+        </div>
+        <div>
+          <span class="lbl">Где стена</span>
+          <div class="seg two">
+            <input type="radio" name="c-loc" id="c-in" value="1" checked><label for="c-in">В помещении<small>базовая цена</small></label>
+            <input type="radio" name="c-loc" id="c-out" value="1.2"><label for="c-out">На улице<small>+20%: фасадные краски, лак</small></label>
+          </div>
+        </div>
+        <div class="result" aria-live="polite">
+          <span class="sub">Ориентировочно</span>
+          <span class="sum" id="c-sum">38 000 – 42 000 ₴</span>
+          <span class="sub" id="c-days">Срок: 5–6 рабочих дней, включая эскиз</span>
+        </div>
+        <button type="button" class="btn btn-main" id="c-go">Зафиксировать цену и получить эскиз</button>
+        <p class="fine">Точную цену назову после фото стены. Обычно отличие — не больше 10%.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="guar">
+      <div><strong>5 лет</strong><p>Гарантия на уличные работы. Выцвело или облупилось — подновлю бесплатно.</p></div>
+      <div><strong>0 ₴</strong><p>За эскиз, если решите не заказывать. Никаких обязательств.</p></div>
+      <div><strong>Фикс</strong><p>Цена из договора не растёт, даже если краски ушло больше.</p></div>
+      <div><strong>День в день</strong><p>Срок сдачи прописан в договоре. Просрочка — скидка 2% за каждый день.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="about" style="background:var(--surface);border-block:1px solid var(--line)">
+  <div class="wrap">
+    <figure class="portrait" style="margin:0">
+      <canvas data-style="studio" data-seed="3" aria-hidden="true"></canvas>
+      <figcaption>Артём на объекте, Подол, 2026</figcaption>
+    </figure>
+    <div class="about-copy">
+      <span class="eyebrow">Кто рисует</span>
+      <h2>Привет, я Артём. Расписываю стены 9 лет.</h2>
+      <p>Закончил НАОМА по кафедре монументальной живописи. Начинал с уличных фестивалей, сейчас работаю с бизнесом и частными клиентами. Каждую стену веду сам, от эскиза до лака, а на большие фасады беру проверенную команду из двух ассистентов.</p>
+      <blockquote>«Хорошая роспись — это когда через год владелец кафе говорит, что гости до сих пор фотографируются у стены».</blockquote>
+      <div class="hero-cta"><a class="btn btn-main" href="#lead">Обсудить вашу стену</a></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Отзывы</span>
+      <h2>Что говорят заказчики</h2>
+    </div>
+    <div class="revs">
+      <article class="rev"><div class="stars" aria-label="5 из 5">★★★★★</div><p>Стена с лэттерингом стала визитной карточкой кофейни. За первый месяц отметок в Instagram стало в три раза больше. Эскиз был готов на следующий день.</p><footer><i style="background:#B9771A">О</i><div><b>Оксана Мельник</b><span>владелица кофейни «Зерно»</span></div></footer></article>
+      <article class="rev"><div class="stars" aria-label="5 из 5">★★★★★</div><p>Нужно было расписать переговорную в цветах бренда за выходные, чтобы не мешать команде. Артём уложился в два дня, без запаха и грязи. Работаем дальше.</p><footer><i style="background:#2743D6">Д</i><div><b>Дмитрий Коваль</b><span>офис-менеджер Nordlane</span></div></footer></article>
+      <article class="rev"><div class="stars" aria-label="5 из 5">★★★★★</div><p>Забор постоянно разрисовывали тегами. После росписи прошло полтора года — ни одного тега. Соседи приходят фотографироваться.</p><footer><i style="background:#1F8A55">И</i><div><b>Ирина Бондаренко</b><span>частный дом, Ирпень</span></div></footer></article>
+    </div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap faq">
+    <div class="sec-head" style="margin:0">
+      <span class="eyebrow">Вопросы</span>
+      <h2>Частые вопросы</h2>
+      <p class="lead">Не нашли ответ — спросите в Telegram, отвечаю быстро.</p>
+    </div>
+    <div>
+      <details open><summary>Сколько стоит роспись стены?</summary><p>От 1 200 ₴ за м² для графики до 3 200 ₴ за м² для реализма. Уличные работы дороже на 20% из-за фасадных красок и лака. Минимальный заказ 12 000 ₴. Примерную сумму покажет калькулятор выше.</p></details>
+      <details><summary>Можно ли посмотреть, как это будет выглядеть, до оплаты?</summary><p>Да. Я рисую эскиз прямо на фотографии вашей стены. Вы видите результат, вносите правки, и только потом подписываем договор.</p></details>
+      <details><summary>Сколько держится роспись на улице?</summary><p>8–12 лет при правильной подготовке. Я грунтую стену, пишу фасадными акрилами и покрываю УФ- и антивандальным лаком. Гарантия на уличные работы 5 лет.</p></details>
+      <details><summary>Нужно ли разрешение на роспись фасада?</summary><p>Для многоквартирных домов нужно согласие ОСББ или управляющей компании, для исторических зданий — согласование с органами охраны памятников. Помогаю подготовить эскиз и документы для согласования.</p></details>
+      <details><summary>Будет ли запах и грязь в помещении?</summary><p>Использую водные акриловые краски без резкого запаха. Застилаю пол и мебель плёнкой, после работы убираю. В офисах могу работать вечером и в выходные.</p></details>
+      <details><summary>Работаете за пределами Киева?</summary><p>Да, по всей Украине. По Киеву и области выезд бесплатный, в другие города — оплачиваются дорога и проживание.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="lead-sec" id="lead">
+  <div class="wrap lead-grid">
+    <div class="lead-side">
+      <span class="eyebrow">Заявка</span>
+      <h2>Получите бесплатный эскиз для вашей стены</h2>
+      <p class="lead">Заполнение займёт меньше минуты. Обязательны только имя и телефон.</p>
+      <ol>
+        <li><div><b>Перезвоню за 30 минут</b><span>в рабочее время, 9:00–21:00</span></div></li>
+        <li><div><b>Уточню детали и назову цену</b><span>по фото стены или после бесплатного замера</span></div></li>
+        <li><div><b>Пришлю эскиз через 48 часов</b><span>платите, только если понравится</span></div></li>
+      </ol>
+      <div class="contacts-alt">
+        <div class="row"><span>Или напишите сами:</span></div>
+        <div class="row"><span>Телефон / Viber</span><b>+380 67 123 45 67</b><button class="copy" type="button" data-copy="+380671234567">Копировать</button></div>
+        <div class="row"><span>Telegram</span><a href="https://t.me/ohra_murals" target="_blank" rel="noopener"><b>@ohra_murals</b></a></div>
+        <div class="row"><span>Instagram</span><a href="https://instagram.com/ohra.murals" target="_blank" rel="noopener"><b>@ohra.murals</b></a></div>
+      </div>
+    </div>
+
+    <form class="lead" id="lead-form" novalidate>
+      <div class="calc-note" id="calc-note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M8 18h8"/></svg><span id="calc-note-text"></span></div>
+      <div class="two-col">
+        <div class="fld" id="f-name-w"><label for="f-name">Ваше имя</label><input type="text" id="f-name" name="name" autocomplete="given-name" placeholder="Например, Анна"><span class="err">Напишите, как к вам обращаться</span></div>
+        <div class="fld" id="f-phone-w"><label for="f-phone">Телефон</label><input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+380 __ ___ __ __"><span class="err">Проверьте номер: нужно не меньше 10 цифр</span></div>
+      </div>
+      <div class="fld"><span class="lbl">Где удобнее ответить?</span>
+        <div class="chips">
+          <input type="radio" name="via" id="v-tg" value="Telegram" checked><label for="v-tg">Telegram</label>
+          <input type="radio" name="via" id="v-vb" value="Viber"><label for="v-vb">Viber</label>
+          <input type="radio" name="via" id="v-wa" value="WhatsApp"><label for="v-wa">WhatsApp</label>
+          <input type="radio" name="via" id="v-call" value="Звонок"><label for="v-call">Позвонить</label>
+        </div>
+      </div>
+      <div class="fld"><span class="lbl">Что расписываем? <span class="opt">необязательно</span></span>
+        <div class="chips" id="obj-chips">
+          <input type="radio" name="obj" id="o1" value="Кафе / ресторан"><label for="o1">Кафе / ресторан</label>
+          <input type="radio" name="obj" id="o2" value="Офис"><label for="o2">Офис</label>
+          <input type="radio" name="obj" id="o3" value="Фасад / забор"><label for="o3">Фасад / забор</label>
+          <input type="radio" name="obj" id="o4" value="Квартира / дом"><label for="o4">Квартира / дом</label>
+          <input type="radio" name="obj" id="o5" value="Детская"><label for="o5">Детская</label>
+          <input type="radio" name="obj" id="o6" value="Другое"><label for="o6">Другое</label>
+        </div>
+      </div>
+      <div class="two-col">
+        <div class="fld"><label for="f-area">Площадь, м² <span class="opt">примерно</span></label><input type="number" id="f-area" name="area" min="1" inputmode="numeric" placeholder="20"></div>
+        <div class="fld"><span class="lbl">Фото стены <span class="opt">ускорит расчёт</span></span>
+          <label class="file" for="f-photo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span id="f-photo-name">Прикрепить фото</span><input type="file" id="f-photo" name="photo" accept="image/*" multiple></label></div>
+      </div>
+      <div class="fld"><label for="f-msg">Идея или пожелания <span class="opt">необязательно</span></label><textarea id="f-msg" name="msg" placeholder="Например: стена 4×3 м в кофейне, хотим что-то про утро и кофе в фирменных цветах"></textarea></div>
+      <button class="btn btn-main" type="submit">Получить бесплатный эскиз
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      <p class="privacy">Номер нужен только для связи по заявке. Без рассылок и спама.</p>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <span><b>ОХРА</b> · мурал-студия Артёма Левченко · ФЛП Левченко А. С.</span>
+    <span>Киев, ул. Нижний Вал, 15 (мастерская, по записи)</span>
+    <span>+380 67 123 45 67 · hello@ohra.studio</span>
+  </div>
+</footer>
+
+<div class="mbar">
+  <a class="btn btn-ghost" href="#calc">Рассчитать</a>
+  <a class="btn btn-main" href="#lead">Оставить заявку</a>
+</div>
+
+<dialog id="modal" aria-labelledby="m-title">
+  <button class="m-close" type="button" id="m-close" aria-label="Закрыть">×</button>
+  <div class="m-pic"><canvas id="m-canvas"></canvas></div>
+  <div class="m-body">
+    <h3 id="m-title" style="font-size:24px"></h3>
+    <div class="meta" id="m-meta"></div>
+    <p id="m-text"></p>
+    <div class="m-actions">
+      <button class="btn btn-main" type="button" id="m-order">Хочу похожее</button>
+      <button class="btn btn-ghost" type="button" id="m-back">Смотреть другие</button>
+    </div>
+  </div>
+</dialog>
+
+<script>
+(function(){
+"use strict";
+/* ---------- procedural murals (заглушки вместо фото работ) ---------- */
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;var t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function pick(r,arr){return arr[Math.floor(r()*arr.length)]}
+
+function bricks(c,w,h,r,o){
+  var bh=Math.max(10,h/(o.rows||16)),bw=bh*2.3,m=Math.max(1,bh*.12);
+  for(var y=0,row=0;y<h+bh;y+=bh,row++){
+    var off=row%2?-bw/2:0;
+    for(var x=off;x<w+bw;x+=bw){
+      if(o.paint){c.fillStyle="rgba("+(r()<.5?"0,0,0":"255,255,255")+","+(r()*.05).toFixed(3)+")";c.fillRect(x,y,bw-m,bh-m)}
+      else{var l=o.l+(r()-.5)*o.v;c.fillStyle="hsl("+(o.hue+(r()-.5)*8)+","+o.s+"%,"+l+"%)";c.fillRect(x,y,bw-m,bh-m)}
+    }
+  }
+  if(o.paint){c.save();c.globalCompositeOperation="multiply";c.strokeStyle="rgba(0,0,0,.16)";c.lineWidth=m;
+    for(var yy=0,rw=0;yy<h+bh;yy+=bh,rw++){c.beginPath();c.moveTo(0,yy-m/2);c.lineTo(w,yy-m/2);c.stroke();
+      var of=rw%2?-bw/2:0;for(var xx=of;xx<w+bw;xx+=bw){c.beginPath();c.moveTo(xx-m/2,yy);c.lineTo(xx-m/2,yy+bh-m);c.stroke()}}
+    c.restore()}
+}
+function grime(c,w,h,r){
+  var g=c.createLinearGradient(0,h*.55,0,h);g.addColorStop(0,"rgba(30,25,20,0)");g.addColorStop(1,"rgba(30,25,20,.45)");c.fillStyle=g;c.fillRect(0,0,w,h);
+  for(var i=0;i<26;i++){c.fillStyle="rgba(20,18,16,"+(r()*.12)+")";c.beginPath();c.ellipse(r()*w,r()*h,r()*w*.12+8,r()*h*.06+6,r()*3,0,7);c.fill()}
+  c.strokeStyle="rgba(25,25,28,.55)";c.lineWidth=Math.max(2,w*.006);c.lineCap="round";
+  for(var k=0;k<3;k++){var x=w*(.15+r()*.6),y=h*(.55+r()*.3);c.beginPath();c.moveTo(x,y);for(var j=0;j<6;j++){x+=w*(.02+r()*.04);y+=(r()-.5)*h*.06;c.lineTo(x,y)}c.stroke()}
+}
+function leaf(c,s,col,vein){c.beginPath();c.moveTo(0,0);c.quadraticCurveTo(s*.5,-s*.36,s,0);c.quadraticCurveTo(s*.5,s*.36,0,0);c.fillStyle=col;c.fill();
+  c.strokeStyle=vein;c.lineWidth=Math.max(1,s*.02);c.beginPath();c.moveTo(0,0);c.lineTo(s*.92,0);c.stroke();
+  for(var i=1;i<5;i++){var x=s*i/5.4;c.beginPath();c.moveTo(x,0);c.lineTo(x+s*.1,-s*.14);c.moveTo(x,0);c.lineTo(x+s*.1,s*.14);c.stroke()}}
+
+var STY={
+  wall:function(c,w,h,r){bricks(c,w,h,r,{hue:16,s:22,l:40,v:9,rows:18});grime(c,w,h,r)},
+  botanica:function(c,w,h,r){
+    c.fillStyle="#1D4535";c.fillRect(0,0,w,h);
+    c.fillStyle="#E2A31C";c.beginPath();c.arc(w*(.25+r()*.5),h*(.3+r()*.3),Math.min(w,h)*.26,0,7);c.fill();
+    var cols=["#2C7556","#3E9C73","#7FC79C","#14382A","#F0E3BF","#E2A31C"];
+    for(var i=0;i<34;i++){c.save();c.translate(r()*w,r()*h);c.rotate(r()*6.3);leaf(c,Math.min(w,h)*(.18+r()*.38),pick(r,cols),"rgba(10,30,20,.45)");c.restore()}
+  },
+  geo:function(c,w,h,r){
+    var cols=["#2743D6","#E2A31C","#E2513A","#16181B","#EFEDE6","#7FC7C0"],n=6,m=Math.ceil(n*h/w),cs=w/n;
+    for(var y=0;y<m;y++)for(var x=0;x<n;x++){var X=x*cs,Y=y*cs,a=pick(r,cols),b=pick(r,cols);if(a===b)b="#EFEDE6";c.fillStyle=a;c.fillRect(X,Y,cs+1,cs+1);c.fillStyle=b;var t=Math.floor(r()*5);c.beginPath();
+      if(t===0){c.moveTo(X,Y);c.arc(X,Y,cs,0,Math.PI/2);c.closePath()}
+      else if(t===1){c.arc(X+cs/2,Y+cs,cs/2,Math.PI,0)}
+      else if(t===2){c.moveTo(X,Y+cs);c.lineTo(X+cs,Y);c.lineTo(X+cs,Y+cs)}
+      else if(t===3){c.arc(X+cs/2,Y+cs/2,cs*.32,0,7)}
+      else{for(var s=0;s<4;s++)c.rect(X,Y+s*cs/4,cs,cs/8)}
+      c.fill()}
+  },
+  waves:function(c,w,h,r){
+    var g=c.createLinearGradient(0,0,0,h*.7);g.addColorStop(0,"#3B2A86");g.addColorStop(.45,"#E5577A");g.addColorStop(1,"#FFB55A");c.fillStyle=g;c.fillRect(0,0,w,h);
+    c.fillStyle="#FFE08A";c.beginPath();c.arc(w*.62,h*.4,Math.min(w,h)*.17,0,7);c.fill();
+    c.strokeStyle="rgba(255,224,138,.5)";c.lineWidth=Math.max(2,h*.006);for(var k=1;k<4;k++){c.beginPath();c.arc(w*.62,h*.4,Math.min(w,h)*(.17+k*.05),0,7);c.stroke()}
+    var cols=["#F07A5A","#C2457A","#7A3191","#4A2380","#26195C","#140F3A"];
+    for(var i=0;i<cols.length;i++){var base=h*(.46+i*.09),amp=h*(.03+r()*.03),f=(1.5+r()*2)*Math.PI*2/w,ph=r()*6;c.fillStyle=cols[i];c.beginPath();c.moveTo(0,h);
+      for(var x=0;x<=w+4;x+=4)c.lineTo(x,base+Math.sin(x*f+ph)*amp+Math.sin(x*f*2.3+ph)*amp*.35);c.lineTo(w,h);c.fill()}
+    c.fillStyle="#140F3A";for(var b=0;b<5;b++){var bx=w*(.15+r()*.7),by=h*(.12+r()*.2),bs=w*.018;c.beginPath();c.moveTo(bx-bs,by);c.quadraticCurveTo(bx-bs/2,by-bs*.6,bx,by);c.quadraticCurveTo(bx+bs/2,by-bs*.6,bx+bs,by);c.quadraticCurveTo(bx,by-bs*.3,bx-bs,by);c.fill()}
+  },
+  lettering:function(c,w,h,r,word){
+    c.fillStyle="#E2A31C";c.fillRect(0,0,w,h);
+    c.save();c.translate(w/2,h/2);c.rotate(-.35);c.fillStyle="#D58F12";for(var i=-12;i<12;i++)c.fillRect(i*w*.12,-h*1.5,w*.05,h*3);c.restore();
+    c.fillStyle="#16181B";c.beginPath();c.arc(w*.82,h*.22,h*.12,0,7);c.fill();
+    c.fillStyle="#F6EFDF";c.beginPath();c.ellipse(w*.18,h*.8,w*.16,h*.07,0,0,7);c.fill();
+    word=word||"ЗЕРНО";var fs=Math.min(h*.36,w*.95/(word.length*.86));c.font="800 "+fs+"px Unbounded, 'Arial Black', sans-serif";c.textAlign="center";c.textBaseline="middle";
+    c.fillStyle="#16181B";c.fillText(word,w/2+fs*.07,h*.5+fs*.07);c.fillStyle="#F6EFDF";c.fillText(word,w/2,h*.5);
+    c.font="700 "+fs*.22+"px Manrope, sans-serif";c.fillStyle="#16181B";c.fillText("coffee · since 2019",w/2,h*.5+fs*.75);
+  },
+  space:function(c,w,h,r){
+    var g=c.createRadialGradient(w*.3,h*.3,10,w*.5,h*.5,Math.max(w,h)*.8);g.addColorStop(0,"#2B3192");g.addColorStop(1,"#0B0D2A");c.fillStyle=g;c.fillRect(0,0,w,h);
+    for(var i=0;i<160;i++){c.fillStyle="rgba(255,255,255,"+(.3+r()*.7)+")";var s=r()*2.2+.5;c.fillRect(r()*w,r()*h,s,s)}
+    var P=[["#E2A31C",.25,.35,.14],["#E2513A",.72,.62,.09],["#7FC7C0",.6,.2,.05],["#B07BE8",.15,.78,.07]];
+    P.forEach(function(p){var R=Math.min(w,h)*p[3]*1.6,x=w*p[1],y=h*p[2];c.fillStyle=p[0];c.beginPath();c.arc(x,y,R,0,7);c.fill();
+      c.fillStyle="rgba(0,0,0,.18)";c.beginPath();c.arc(x+R*.3,y+R*.2,R*.85,0,7);c.fill()});
+    c.strokeStyle="#F6EFDF";c.lineWidth=Math.max(2,h*.012);c.beginPath();c.ellipse(w*.25,h*.35,Math.min(w,h)*.38,Math.min(w,h)*.08,-.3,0,7);c.stroke();
+    c.save();c.translate(w*.82,h*.25);c.rotate(.6);var k=Math.min(w,h)*.09;c.fillStyle="#F6EFDF";c.beginPath();c.moveTo(0,-k*1.4);c.quadraticCurveTo(k*.6,-k*.4,k*.45,k);c.lineTo(-k*.45,k);c.quadraticCurveTo(-k*.6,-k*.4,0,-k*1.4);c.fill();
+    c.fillStyle="#E2513A";c.beginPath();c.moveTo(-k*.45,k*.6);c.lineTo(-k*.8,k*1.2);c.lineTo(-k*.3,k);c.moveTo(k*.45,k*.6);c.lineTo(k*.8,k*1.2);c.lineTo(k*.3,k);c.fill();
+    c.fillStyle="#E2A31C";c.beginPath();c.moveTo(-k*.3,k);c.lineTo(0,k*1.9);c.lineTo(k*.3,k);c.fill();c.fillStyle="#2743D6";c.beginPath();c.arc(0,-k*.2,k*.22,0,7);c.fill();c.restore();
+  },
+  city:function(c,w,h,r){
+    var g=c.createLinearGradient(0,0,0,h);g.addColorStop(0,"#1F2366");g.addColorStop(.6,"#E2513A");g.addColorStop(1,"#F2A13A");c.fillStyle=g;c.fillRect(0,0,w,h);
+    c.fillStyle="#FFD27A";c.beginPath();c.arc(w*.3,h*.55,Math.min(w,h)*.16,0,7);c.fill();
+    [["#3A2A6B",.5],["#26204F",.65],["#14122F",.8]].forEach(function(L,li){var x=0;while(x<w){var bw=w*(.05+r()*.07),bh=h*(L[1]*.55+r()*.35);c.fillStyle=L[0];c.fillRect(x,h-bh,bw+1,bh);
+      if(li===2){c.fillStyle="rgba(255,210,122,.85)";for(var wy=h-bh+8;wy<h-8;wy+=h*.045)for(var wx=x+5;wx<x+bw-8;wx+=w*.018)if(r()<.45)c.fillRect(wx,wy,w*.008,h*.018)}
+      x+=bw}});
+  },
+  studio:function(c,w,h,r){
+    STY.botanica(c,w,h,r);
+    c.fillStyle="rgba(15,17,19,.25)";c.fillRect(0,0,w,h);
+    var x=w*.55,y=h*.95,s=Math.min(w,h);
+    c.fillStyle="#16181B";
+    c.beginPath();c.arc(x,y-s*.62,s*.08,0,7);c.fill();
+    c.beginPath();c.moveTo(x-s*.16,y);c.quadraticCurveTo(x-s*.17,y-s*.5,x,y-s*.52);c.quadraticCurveTo(x+s*.17,y-s*.5,x+s*.16,y);c.fill();
+    c.strokeStyle="#16181B";c.lineWidth=s*.035;c.lineCap="round";c.beginPath();c.moveTo(x-s*.12,y-s*.42);c.quadraticCurveTo(x-s*.28,y-s*.55,x-s*.3,y-s*.72);c.stroke();
+    c.strokeStyle="#E2A31C";c.lineWidth=s*.012;c.beginPath();c.moveTo(x-s*.3,y-s*.72);c.lineTo(x-s*.36,y-s*.84);c.stroke();
+    c.fillStyle="#E2A31C";c.beginPath();c.arc(x-s*.365,y-s*.85,s*.012,0,7);c.fill();
+  }
+};
+
+function paint(cv){
+  var st=cv.dataset.style,seed=+cv.dataset.seed||1,word=cv.dataset.word;
+  var rect=cv.getBoundingClientRect(); if(!rect.width)return;
+  var dpr=Math.min(window.devicePixelRatio||1,2),w=Math.round(rect.width*dpr),h=Math.round(rect.height*dpr);
+  if(cv.width===w&&cv.height===h&&cv._done)return;
+  cv.width=w;cv.height=h;var c=cv.getContext("2d");var r=rng(seed*9973);
+  (STY[st]||STY.wall)(c,w,h,r,word);
+  if(st!=="wall")bricks(c,w,h,rng(seed),{paint:true,rows:st==="studio"?14:18});
+  cv._done=true;
+}
+function paintAll(force){document.querySelectorAll("canvas[data-style]").forEach(function(cv){if(force)cv._done=false;paint(cv)})}
+
+/* ---------- portfolio ---------- */
+var WORKS=[
+  {t:"Кофейня «Зерно», Подол",cat:"biz",style:"lettering",word:"ЗЕРНО",seed:11,area:24,days:5,price:"от 34 000 ₴",lvl:"Графика + лэттеринг",txt:"Фирменный лэттеринг на кирпичной стене зала. Стена стала главной фотозоной: гости отмечают кофейню в сторис каждый день."},
+  {t:"IT-офис Nordlane",cat:"biz",style:"geo",seed:21,area:46,days:8,price:"от 55 000 ₴",lvl:"Графика",txt:"Геометрический паттерн в цветах бренда для open space и переговорной. Работал по вечерам, чтобы не мешать команде."},
+  {t:"Фасад ЖК «Липки»",cat:"out",style:"waves",seed:7,area:180,days:21,price:"от 430 000 ₴",lvl:"Иллюстрация",txt:"Закат над Днепром на торце жилого дома. Согласование с ОСББ, работа с подъёмника, антивандальный лак."},
+  {t:"Детская, Осокорки",cat:"home",style:"space",seed:5,area:14,days:4,price:"от 18 000 ₴",lvl:"Иллюстрация",txt:"Космос с ракетой и планетами для комнаты шестилетнего Марка. Гипоаллергенные краски без запаха."},
+  {t:"Ресторан «Сад»",cat:"biz",style:"botanica",seed:31,area:38,days:7,price:"от 76 000 ₴",lvl:"Иллюстрация",txt:"Тропические листья во всю стену зала, перекличка с живыми растениями в интерьере."},
+  {t:"Забор частного дома, Ирпень",cat:"out",style:"city",seed:41,area:60,days:6,price:"от 86 000 ₴",lvl:"Графика",txt:"Ночной город вдоль забора длиной 30 метров. Полтора года без единого тега."}
+];
+var grid=document.getElementById("grid");
+WORKS.forEach(function(wk,i){
+  var b=document.createElement("button");b.className="card";b.type="button";b.dataset.cat=wk.cat;b.dataset.i=i;
+  b.innerHTML='<div class="pic"><canvas data-style="'+wk.style+'" data-seed="'+wk.seed+'"'+(wk.word?' data-word="'+wk.word+'"':'')+' aria-hidden="true"></canvas><span class="more">Подробнее</span></div><h3>'+wk.t+'</h3><div class="meta"><span>'+wk.area+' м²</span><span>'+wk.days+' дней</span><span>'+wk.price+'</span></div>';
+  b.addEventListener("click",function(){openWork(i)});
+  grid.appendChild(b);
+});
+document.querySelectorAll(".filters .chip").forEach(function(ch){ch.addEventListener("click",function(){
+  document.querySelectorAll(".filters .chip").forEach(function(x){x.setAttribute("aria-pressed","false")});ch.setAttribute("aria-pressed","true");
+  var f=ch.dataset.f;grid.querySelectorAll(".card").forEach(function(cd){cd.hidden=!(f==="all"||cd.dataset.cat===f)});paintAll();
+})});
+
+var modal=document.getElementById("modal"),mc=document.getElementById("m-canvas"),cur=null;
+function openWork(i){
+  var wk=WORKS[i];cur=wk;
+  document.getElementById("m-title").textContent=wk.t;
+  document.getElementById("m-meta").innerHTML="<span>"+wk.area+" м²</span><span>"+wk.days+" рабочих дней</span><span>"+wk.lvl+"</span><span>"+wk.price+"</span>";
+  document.getElementById("m-text").textContent=wk.txt;
+  mc.dataset.style=wk.style;mc.dataset.seed=wk.seed;if(wk.word)mc.dataset.word=wk.word;else delete mc.dataset.word;mc._done=false;
+  if(modal.showModal)modal.showModal();else modal.setAttribute("open","");
+  requestAnimationFrame(function(){paint(mc)});
+}
+function closeModal(){if(modal.close)modal.close();else modal.removeAttribute("open")}
+document.getElementById("m-close").onclick=closeModal;
+document.getElementById("m-back").onclick=closeModal;
+modal.addEventListener("click",function(e){if(e.target===modal)closeModal()});
+document.getElementById("m-order").onclick=function(){
+  closeModal();var msg=document.getElementById("f-msg");msg.value="Хочу похожую роспись, как «"+cur.t+"». ";
+  var map={biz:cur.style==="geo"?"o2":(cur.style==="lettering"||cur.style==="botanica"?"o1":"o2"),out:"o3",home:cur.style==="space"?"o5":"o4"};
+  var o=document.getElementById(map[cur.cat]);if(o)o.checked=true;
+  goLead();
+};
+
+/* ---------- before/after ---------- */
+var ba=document.getElementById("ba"),bar=document.getElementById("ba-range");
+bar.addEventListener("input",function(){ba.style.setProperty("--pos",bar.value+"%")});
+
+/* ---------- calculator ---------- */
+var area=document.getElementById("c-area"),aout=document.getElementById("c-area-out");
+var fmt=function(n){return Math.round(n).toLocaleString("ru-RU").replace(/,/g," ")};
+var last={};
+function calc(){
+  var a=+area.value,rate=+document.querySelector('input[name="c-lvl"]:checked').value,k=+document.querySelector('input[name="c-loc"]:checked').value;
+  aout.textContent=a+" м²";
+  var base=Math.max(12000,a*rate*k),lo=Math.round(base*.95/1000)*1000,hi=Math.round(base*1.05/1000)*1000;if(hi===lo)hi+=1000;
+  var speed={1200:12,2000:7,3200:4}[rate],d=Math.ceil(a/speed)+2,d2=d+Math.max(1,Math.round(d*.2));
+  var lvlName={1200:"графика",2000:"иллюстрация",3200:"реализм"}[rate];
+  document.getElementById("c-sum").textContent=fmt(lo)+" – "+fmt(hi)+" ₴";
+  document.getElementById("c-days").textContent="Срок: "+d+"–"+d2+" рабочих дней, включая эскиз";
+  last={a:a,lo:lo,hi:hi,lvl:lvlName,out:k>1};
+}
+document.getElementById("calc").addEventListener("input",calc);calc();
+document.getElementById("c-go").addEventListener("click",function(){
+  document.getElementById("f-area").value=last.a;
+  var n=document.getElementById("calc-note");document.getElementById("calc-note-text").textContent="Ваш расчёт: "+last.a+" м², "+last.lvl+(last.out?", улица":"")+" — "+fmt(last.lo)+"–"+fmt(last.hi)+" ₴. Цена зафиксирована на 14 дней.";
+  n.classList.add("show");if(last.out){var o3=document.getElementById("o3");if(o3)o3.checked=true}
+  goLead();
+});
+
+/* surface cards prefill object type */
+document.querySelectorAll(".surf a").forEach(function(a){a.addEventListener("click",function(){
+  var v=a.dataset.obj;document.querySelectorAll('#obj-chips input').forEach(function(i){if(i.value===v)i.checked=true});
+  setTimeout(function(){document.getElementById("f-name").focus({preventScroll:true})},500);
+})});
+
+function goLead(){document.getElementById("lead").scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});setTimeout(function(){document.getElementById("f-name").focus({preventScroll:true})},600)}
+
+/* ---------- lead form ---------- */
+var photo=document.getElementById("f-photo");
+photo.addEventListener("change",function(){var n=photo.files.length;document.getElementById("f-photo-name").textContent=n?(n===1?photo.files[0].name:"Выбрано файлов: "+n):"Прикрепить фото"});
+var phone=document.getElementById("f-phone");
+phone.addEventListener("focus",function(){if(!phone.value)phone.value="+380 "});
+var form=document.getElementById("lead-form");
+form.addEventListener("submit",function(e){
+  e.preventDefault();
+  var name=document.getElementById("f-name"),ok=true;
+  var nw=document.getElementById("f-name-w"),pw=document.getElementById("f-phone-w");
+  nw.classList.toggle("bad",name.value.trim().length<2);if(name.value.trim().length<2)ok=false;
+  var digits=phone.value.replace(/\D/g,"");pw.classList.toggle("bad",digits.length<10);if(digits.length<10)ok=false;
+  if(!ok){(nw.classList.contains("bad")?name:phone).focus();return}
+  /* Здесь подключается отправка: Telegram-бот, Formspree или CRM */
+  var via=document.querySelector('input[name="via"]:checked').value;
+  form.innerHTML='<div class="done"><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg></span><h3 style="font-size:26px">Спасибо, '+name.value.trim().replace(/[<>&"]/g,"")+'!</h3><p>Заявка принята. Свяжусь с вами '+(via==="Звонок"?"по телефону":"в "+via)+' в течение 30 минут в рабочее время. Пока можно подобрать 2–3 картинки-референса.</p><p style="font-size:13px">Это демо-макет: заявка никуда не отправлена.</p></div>';
+});
+["f-name","f-phone"].forEach(function(id){document.getElementById(id).addEventListener("input",function(){document.getElementById(id+"-w").classList.remove("bad")})});
+
+/* copy */
+document.querySelectorAll(".copy").forEach(function(b){b.addEventListener("click",function(){
+  var t=b.dataset.copy;var done=function(){b.textContent="Скопировано";setTimeout(function(){b.textContent="Копировать"},1600)};
+  try{navigator.clipboard.writeText(t).then(done,function(){sel(b)})}catch(e){sel(b)}
+})});
+function sel(b){var el=b.previousElementSibling;var rg=document.createRange();rg.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(rg)}
+
+/* paint */
+paintAll();
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){paintAll(true)});
+var t;window.addEventListener("resize",function(){clearTimeout(t);t=setTimeout(function(){paintAll()},150)});
+})();
+</script>
+</body>
+</html>
