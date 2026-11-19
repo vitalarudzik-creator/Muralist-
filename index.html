@@ -38,7 +38,7 @@ h2{font-size:clamp(25px,4.2vw,46px);font-weight:700;overflow-wrap:break-word}
 h3{font-size:19px;font-weight:700}
 p{margin:0}
 .wrap{max-width:var(--max);margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-section{padding-block:clamp(64px,9vw,112px)}
+section{padding-block:clamp(64px,9vw,112px);scroll-margin-top:72px}
 .eyebrow{font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);display:flex;gap:10px;align-items:center}
 .eyebrow::before{content:"";width:22px;height:3px;background:var(--ochre);border-radius:2px}
 .lead{color:var(--muted);font-size:18px;max-width:60ch}
@@ -182,6 +182,7 @@ section{padding-block:clamp(64px,9vw,112px)}
 .calc .btn{width:100%}
 .calc .fine{font-size:13px;opacity:.6;text-align:center}
 @media (max-width:900px){.price-wrap{grid-template-columns:minmax(0,1fr)}}
+.calc{scroll-margin-top:90px}
 .calc>*,.tiers,.lead-grid>*{min-width:0}
 @media (max-width:420px){.seg{grid-template-columns:1fr}}
 
@@ -294,14 +295,48 @@ dialog::backdrop{background:rgba(10,12,14,.66)}
 .m-close{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;border:0;background:rgba(15,17,19,.7);color:#fff;font-size:22px;cursor:pointer;z-index:2}
 
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+
+/* try on your wall */
+.tw{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:start}
+.tw-stage{position:relative;border-radius:var(--r);overflow:hidden;background:var(--line);box-shadow:var(--shadow);touch-action:none}
+.tw-stage canvas{display:block;width:100%;height:auto;cursor:grab}
+.tw-stage canvas:active{cursor:grabbing}
+.tw-hint{position:absolute;left:12px;bottom:12px;background:rgba(15,17,19,.72);color:#fff;font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;pointer-events:none}
+.tw-panel{display:grid;gap:20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.tw-panel .lbl{font-weight:700;font-size:15px;display:flex;justify-content:space-between;gap:10px}
+.tw-panel .lbl output{font-variant-numeric:tabular-nums;color:var(--muted)}
+.tw-up{display:flex;gap:12px;align-items:center;justify-content:center;padding:16px;border:2px dashed var(--ink);border-radius:12px;cursor:pointer;font-weight:700;position:relative;text-align:center}
+.tw-up:hover{background:color-mix(in srgb,var(--ochre) 14%,transparent)}
+.tw-up input{position:absolute;opacity:0;width:1px;height:1px}
+.tw-up:focus-within{outline:3px solid var(--cobalt);outline-offset:2px}
+.tw-up svg{width:22px;height:22px;flex:none}
+.tw-designs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.tw-designs button{all:unset;box-sizing:border-box;cursor:pointer;aspect-ratio:4/3;border-radius:8px;overflow:hidden;border:2.5px solid transparent;background:var(--line);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--muted);text-align:center;line-height:1.2;padding:0}
+.tw-designs button canvas,.tw-designs button img{width:100%;height:100%;object-fit:cover;display:block}
+.tw-designs button[aria-pressed="true"]{border-color:var(--ochre)}
+.tw-designs button:focus-visible{outline:3px solid var(--cobalt);outline-offset:2px}
+.tw-designs label.own{cursor:pointer;aspect-ratio:4/3;border-radius:8px;border:2px dashed var(--line);display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--muted);text-align:center;line-height:1.2;position:relative}
+.tw-designs label.own input{position:absolute;opacity:0;width:1px;height:1px}
+.tw-panel input[type=range]{width:100%;accent-color:var(--ochre);margin:8px 0 0}
+.tw-toggle{display:flex;gap:10px;align-items:center;font-size:15px;font-weight:600;cursor:pointer}
+.tw-toggle input{width:20px;height:20px;accent-color:var(--ochre)}
+.tw-panel .btn{width:100%}
+.tw-priv{font-size:13px;color:var(--muted)}
+.tw-thumb{display:none;gap:12px;align-items:center;font-size:14px;font-weight:600;padding:10px;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+.tw-thumb.show{display:flex}
+.tw-thumb img{width:84px;height:auto;border-radius:6px;display:block}
+@media (max-width:900px){.tw{grid-template-columns:minmax(0,1fr)}}
 </style>
 </head>
 <body>
+
+
 <header class="top">
   <div class="wrap">
     <a class="logo" href="#top" aria-label="OHRA home"><i></i>OHRA<small>mural studio by Artem Levchenko</small></a>
     <nav class="nav" aria-label="Sections">
       <a href="#works">Work</a>
+      <a href="#try">Try on your wall</a>
       <a href="#process">Process</a>
       <a href="#price">Pricing</a>
       <a href="#reviews">Reviews</a>
@@ -388,6 +423,42 @@ dialog::backdrop{background:rgba(10,12,14,.66)}
     <div class="inline-cta">
       <p>Don't see the style you want?<span>Send a photo of your wall and a couple of references. I'll suggest 2–3 sketch ideas for free.</span></p>
       <a class="btn btn-main" href="#lead">Get a sketch</a>
+    </div>
+  </div>
+</section>
+
+<section id="try" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Try it on your wall</span>
+      <h2>See a mural on your own wall in 10 seconds</h2>
+      <p class="lead">Upload a photo of your wall, pick a design and drag it into place. Then send the preview with your request and I'll draw a proper sketch.</p>
+    </div>
+    <div class="tw">
+      <div class="tw-stage">
+        <canvas id="tw-canvas" aria-label="Preview of the mural on your wall"></canvas>
+        <span class="tw-hint" id="tw-hint">Drag the mural to move it</span>
+      </div>
+      <div class="tw-panel">
+        <label class="tw-up" for="tw-wall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg><span id="tw-wall-name">Upload a photo of your wall</span><input type="file" id="tw-wall" accept="image/*"></label>
+        <div>
+          <span class="lbl">Design</span>
+          <div class="tw-designs" id="tw-designs">
+            <label class="own" for="tw-own">+ Your own sketch<input type="file" id="tw-own" accept="image/*"></label>
+          </div>
+        </div>
+        <div>
+          <div class="lbl"><label for="tw-size">Size</label><output id="tw-size-out">55%</output></div>
+          <input type="range" id="tw-size" min="10" max="100" value="55">
+        </div>
+        <div>
+          <div class="lbl"><label for="tw-op">Opacity</label><output id="tw-op-out">92%</output></div>
+          <input type="range" id="tw-op" min="20" max="100" value="92">
+        </div>
+        <label class="tw-toggle" for="tw-real"><input type="checkbox" id="tw-real" checked>Show wall texture through the paint</label>
+        <button type="button" class="btn btn-main" id="tw-send">Send this preview with my request</button>
+        <p class="tw-priv">Your photo stays in your browser and isn't uploaded anywhere.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -542,6 +613,7 @@ dialog::backdrop{background:rgba(10,12,14,.66)}
     </div>
 
     <form class="lead" id="lead-form" novalidate>
+      <div class="tw-thumb" id="tw-thumb"><img id="tw-thumb-img" alt="Your wall preview"><span>Your wall preview is attached to this request.</span></div>
       <div class="calc-note" id="calc-note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M8 18h8"/></svg><span id="calc-note-text"></span></div>
       <div class="two-col">
         <div class="fld" id="f-name-w"><label for="f-name">Your name</label><input type="text" id="f-name" name="name" autocomplete="given-name" placeholder="e.g. Anna"><span class="err">Tell me what to call you</span></div>
@@ -817,6 +889,51 @@ document.querySelectorAll(".copy").forEach(function(b){b.addEventListener("click
   try{navigator.clipboard.writeText(t).then(done,function(){sel(b)})}catch(e){sel(b)}
 })});
 function sel(b){var el=b.previousElementSibling;var rg=document.createRange();rg.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(rg)}
+
+/* ---------- try on your wall ---------- */
+(function(){
+  var cv=document.getElementById("tw-canvas"),ctx=cv.getContext("2d"),box=document.getElementById("tw-designs");
+  var wall=null,design=null,pos={x:.5,y:.45},size=.55,op=.92,real=true,preview=null;
+  function sample(){var c=document.createElement("canvas");c.width=1200;c.height=900;var g=c.getContext("2d");STY.wall(g,1200,900,rng(77));return c}
+  function makeDesign(w){var c=document.createElement("canvas");c.width=800;c.height=600;var g=c.getContext("2d");(STY[w.style])(g,800,600,rng(w.seed*9973),w.word);return c}
+  wall=sample();
+  var designs=WORKS.map(function(w){return {name:w.t,img:makeDesign(w)}});
+  designs.slice(0,6).forEach(function(d,i){var b=document.createElement("button");b.type="button";b.setAttribute("aria-label",d.name);b.setAttribute("aria-pressed",i===0?"true":"false");
+    var t=document.createElement("canvas");t.width=160;t.height=120;t.getContext("2d").drawImage(d.img,0,0,160,120);b.appendChild(t);
+    b.onclick=function(){select(b,d.img,d.name)};box.insertBefore(b,box.lastElementChild)});
+  var designName=designs[0].name;design=designs[0].img;
+  function select(btn,img,name){box.querySelectorAll("button").forEach(function(x){x.setAttribute("aria-pressed","false")});if(btn)btn.setAttribute("aria-pressed","true");design=img;designName=name;draw()}
+  function fit(){var w=cv.parentElement.clientWidth;if(!w)return;var dpr=Math.min(devicePixelRatio||1,2),ww=wall.naturalWidth||wall.width,wh=wall.naturalHeight||wall.height;
+    var h=Math.min(w*wh/ww,innerHeight*.75);var w2=h*ww/wh;cv.style.width=w2+"px";cv.style.margin="0 auto";cv.width=Math.round(w2*dpr);cv.height=Math.round(h*dpr);draw()}
+  function rect(){var dw=cv.width*size,dh=dw*(design.naturalHeight||design.height)/(design.naturalWidth||design.width);return {x:pos.x*cv.width-dw/2,y:pos.y*cv.height-dh/2,w:dw,h:dh}}
+  function draw(){if(!cv.width)return;ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over";ctx.drawImage(wall,0,0,cv.width,cv.height);
+    var r=rect();
+    if(real){ctx.globalAlpha=op*.7;ctx.drawImage(design,r.x,r.y,r.w,r.h);ctx.globalCompositeOperation="multiply";ctx.globalAlpha=op*.55;ctx.drawImage(design,r.x,r.y,r.w,r.h)}
+    else{ctx.globalAlpha=op;ctx.drawImage(design,r.x,r.y,r.w,r.h)}
+    ctx.globalAlpha=1;ctx.globalCompositeOperation="source-over"}
+  function load(file,cb){if(!file)return;var img=new Image();img.onload=function(){cb(img)};img.onerror=function(){alertBad()};img.src=URL.createObjectURL(file)}
+  function alertBad(){document.getElementById("tw-hint").textContent="Couldn't open that file. Try a JPG or PNG photo."}
+  document.getElementById("tw-wall").addEventListener("change",function(e){var f=e.target.files[0];load(f,function(img){wall=img;document.getElementById("tw-wall-name").textContent="Change wall photo";document.getElementById("tw-hint").textContent="Drag the mural to move it";fit()})});
+  document.getElementById("tw-own").addEventListener("change",function(e){var f=e.target.files[0];load(f,function(img){select(null,img,"my own sketch")})});
+  var so=document.getElementById("tw-size"),oo=document.getElementById("tw-op");
+  so.oninput=function(){size=so.value/100;document.getElementById("tw-size-out").textContent=so.value+"%";draw()};
+  oo.oninput=function(){op=oo.value/100;document.getElementById("tw-op-out").textContent=oo.value+"%";draw()};
+  document.getElementById("tw-real").onchange=function(e){real=e.target.checked;draw()};
+  var drag=null;
+  function pt(e){var b=cv.getBoundingClientRect();return {x:(e.clientX-b.left)/b.width,y:(e.clientY-b.top)/b.height}}
+  cv.addEventListener("pointerdown",function(e){var p=pt(e);drag={dx:pos.x-p.x,dy:pos.y-p.y};cv.setPointerCapture(e.pointerId)});
+  cv.addEventListener("pointermove",function(e){if(!drag)return;var p=pt(e);pos.x=Math.min(1,Math.max(0,p.x+drag.dx));pos.y=Math.min(1,Math.max(0,p.y+drag.dy));draw()});
+  cv.addEventListener("pointerup",function(){drag=null});cv.addEventListener("pointercancel",function(){drag=null});
+  cv.addEventListener("wheel",function(e){e.preventDefault();var v=Math.min(100,Math.max(10,+so.value-Math.sign(e.deltaY)*3));so.value=v;so.oninput()},{passive:false});
+  document.getElementById("tw-send").onclick=function(){
+    try{preview=cv.toDataURL("image/jpeg",.8)}catch(e){preview=null}
+    var th=document.getElementById("tw-thumb");if(preview){document.getElementById("tw-thumb-img").src=preview;th.classList.add("show")}
+    var msg=document.getElementById("f-msg");if(msg.value.indexOf("Preview:")<0)msg.value=(msg.value?msg.value+" ":"")+"Preview: "+designName+" on my wall, about "+Math.round(size*100)+"% of the photo width.";
+    goLead()};
+  var t;addEventListener("resize",function(){clearTimeout(t);t=setTimeout(fit,150)});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){designs[0].img=makeDesign(WORKS[0]);var b=box.querySelector("button canvas");if(b)b.getContext("2d").drawImage(designs[0].img,0,0,160,120);if(designName===designs[0].name)design=designs[0].img;draw()});
+  fit();
+})();
 
 /* paint */
 paintAll();
