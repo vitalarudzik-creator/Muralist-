@@ -46,6 +46,11 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3.6vw,38px)
 .btn:focus-visible,.stage input:focus-visible{outline:3px solid var(--parch);outline-offset:3px}
 .story{color:var(--muted);font-size:15.5px;max-width:70ch;margin:0}
 
+.close{display:grid;gap:16px;margin-top:10px}
+.close-label{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.close a{display:block;border-radius:14px;overflow:hidden;box-shadow:0 24px 50px -28px rgba(0,0,0,.9)}
+.close img{display:block;width:100%;height:auto;max-width:100%}
+.close a:focus-visible{outline:3px solid var(--parch);outline-offset:3px}
 .pal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
 .sw{display:grid;gap:8px}
 .sw i{display:block;aspect-ratio:1/1;max-width:100%;border-radius:12px;border:1px solid var(--line)}
@@ -95,6 +100,12 @@ footer b{color:var(--ink)}
     </div>
     <div class="row"><span class="hint">← Swipe to reveal →</span><button class="btn" type="button">Reveal</button></div>
     <p class="story">Read left to right like a timeline: 1900, Du Bois shows Black America in data at the Paris World's Fair. 1913, Ida B. Wells refuses to march at the back of the suffrage parade. 1926, Carter G. Woodson starts the week that became Black History Month.</p>
+    <div class="close">
+      <span class="close-label">Close-up · tap to open full size</span>
+      <a href="close-1900.jpg" target="_blank" rel="noopener"><img src="close-1900.jpg" alt="Panel 1, 1900 Paris: Du Bois presents his data charts at the World's Fair" loading="lazy"></a>
+      <a href="close-1913.jpg" target="_blank" rel="noopener"><img src="close-1913.jpg" alt="Panel 2, 1913 Washington: Ida B. Wells marches with the Illinois delegation" loading="lazy"></a>
+      <a href="close-1926.jpg" target="_blank" rel="noopener"><img src="close-1926.jpg" alt="Panel 3, 1926: a classroom celebrates the first Negro History Week" loading="lazy"></a>
+    </div>
   </section>
 
   <section>
