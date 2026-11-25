@@ -342,7 +342,7 @@ dialog::backdrop{background:rgba(10,12,14,.66)}
       <a href="#reviews">Reviews</a>
       <a href="#faq">FAQ</a>
     </nav>
-    <a class="top-phone" href="tel:+380671234567">+380 67 123 45 67<span>● Online until 9 pm</span></a>
+    <a class="top-phone" href="tel:+19169550484">(916) 955-0484<span>● Online until 9 pm</span></a>
     <a class="btn btn-main" href="#lead">Get a quote</a>
   </div>
 </header>
@@ -606,7 +606,7 @@ dialog::backdrop{background:rgba(10,12,14,.66)}
       </ol>
       <div class="contacts-alt">
         <div class="row"><span>Or message me directly:</span></div>
-        <div class="row"><span>Phone / Viber</span><b>+380 67 123 45 67</b><button class="copy" type="button" data-copy="+380671234567">Copy</button></div>
+        <div class="row"><span>Phone</span><b>(916) 955-0484</b><button class="copy" type="button" data-copy="+1 916-955-0484">Copy</button></div>
         <div class="row"><span>Telegram</span><a href="https://t.me/ohra_murals" target="_blank" rel="noopener"><b>@ohra_murals</b></a></div>
         <div class="row"><span>Instagram</span><a href="https://www.instagram.com/vitnasmur/" target="_blank" rel="noopener"><b>@vitnasmur</b></a></div>
         <div class="row"><span>TikTok</span><a href="https://www.tiktok.com/@vvitnass" target="_blank" rel="noopener"><b>@vvitnass</b></a></div>
@@ -618,7 +618,7 @@ dialog::backdrop{background:rgba(10,12,14,.66)}
       <div class="calc-note" id="calc-note"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="3" width="16" height="18" rx="2"/><path d="M8 7h8M8 11h2M12 11h2M16 11h0M8 15h2M12 15h2M8 18h8"/></svg><span id="calc-note-text"></span></div>
       <div class="two-col">
         <div class="fld" id="f-name-w"><label for="f-name">Your name</label><input type="text" id="f-name" name="name" autocomplete="given-name" placeholder="e.g. Anna"><span class="err">Tell me what to call you</span></div>
-        <div class="fld" id="f-phone-w"><label for="f-phone">Phone</label><input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="+380 __ ___ __ __"><span class="err">Check the number: it needs at least 10 digits</span></div>
+        <div class="fld" id="f-phone-w"><label for="f-phone">Phone</label><input type="tel" id="f-phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="(___) ___-____"><span class="err">Check the number: it needs at least 10 digits</span></div>
       </div>
       <div class="fld"><span class="lbl">How should I reply?</span>
         <div class="chips">
@@ -656,7 +656,7 @@ dialog::backdrop{background:rgba(10,12,14,.66)}
   <div class="wrap">
     <span><b>OHRA</b> · mural studio by Artem Levchenko</span>
     <span>Studio: 15 Nyzhnii Val St, Kyiv (by appointment)</span>
-    <span>+380 67 123 45 67 · hello@ohra.studio</span>
+    <span>(916) 955-0484 · hello@ohra.studio</span>
     <span>Instagram: <a href="https://www.instagram.com/vitnasmur/" target="_blank" rel="noopener">@vitnasmur</a> · TikTok: <a href="https://www.tiktok.com/@vvitnass" target="_blank" rel="noopener">@vvitnass</a></span>
   </div>
 </footer>
@@ -870,7 +870,6 @@ function goLead(){document.getElementById("lead").scrollIntoView({behavior:match
 var photo=document.getElementById("f-photo");
 photo.addEventListener("change",function(){var n=photo.files.length;document.getElementById("f-photo-name").textContent=n?(n===1?photo.files[0].name:n+" files selected"):"Attach a photo"});
 var phone=document.getElementById("f-phone");
-phone.addEventListener("focus",function(){if(!phone.value)phone.value="+380 "});
 var form=document.getElementById("lead-form");
 form.addEventListener("submit",function(e){
   e.preventDefault();
