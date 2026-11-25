@@ -3,62 +3,61 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Minds That Changed History</title>
+<title>Minds and Moments</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<meta name="description" content="Mural concept for Solano Community College by OHRA mural studio.">
+<meta name="description" content="Black history mural concept for Solano Community College by OHRA mural studio.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@600;800&family=Manrope:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Manrope:wght@400;500;700&display=swap">
 <style>
-/* Layout: one dark gallery wall; the before/after slider is the whole show, stories follow */
+/* Layout: a dark gallery; two curtain reveals carry the pitch, palette and scope follow */
 :root{
-  --bg:#101522; --surface:#182033; --ink:#F3EEE3; --muted:#A9B0C0; --line:#2A3449; --ochre:#E8A93A; --navy:#1B2A4A;
-  --f-display:"Unbounded","Arial Black",system-ui,sans-serif; --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --bg:#17120F; --surface:#221A15; --ink:#F4EADB; --muted:#BBA891; --line:#3A2D24;
+  --ochre:#D69045; --sienna:#8E5129; --umber:#34251E; --parch:#E8D2B0; --indigo:#3D5A86;
+  --f-display:"Playfair Display",Georgia,serif; --f-body:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
 .wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-header{padding-block:28px 18px;display:grid;gap:10px}
-.kicker{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ochre)}
-h1{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,5.4vw,58px);line-height:1.05;margin:0;text-wrap:balance}
-h1 span{color:var(--ochre)}
-.sub{color:var(--muted);max-width:60ch;margin:0}
-
-.stage{position:relative;border-radius:18px;overflow:hidden;background:#000;user-select:none;touch-action:pan-y;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
-.stage canvas,.stage img{display:block;width:100%;height:auto}
-.stage .after{position:absolute;inset:0;width:100%;height:100%;clip-path:inset(0 0 0 var(--pos,50%))}
+header{padding-block:32px 8px;display:grid;gap:10px}
+.kicker{font-size:12px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ochre)}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(32px,6vw,64px);line-height:1.02;margin:0;text-wrap:balance}
+h1 em{font-style:italic;color:var(--ochre)}
+.sub{color:var(--muted);max-width:62ch;margin:0}
+section{padding-block:36px}
+.side{display:grid;gap:14px}
+.side-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap}
+.side-head span{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+h2{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3.6vw,38px);margin:2px 0 0;line-height:1.1;text-wrap:balance}
+.stage{position:relative;border-radius:16px;overflow:hidden;background:#000;user-select:none;touch-action:pan-y;box-shadow:0 30px 60px -30px rgba(0,0,0,.9);max-width:100%}
+.stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.stage .after{clip-path:inset(0 0 0 var(--pos,100%))}
 .stage input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;z-index:3}
-.handle{position:absolute;top:0;bottom:0;left:var(--pos,50%);width:3px;margin-left:-1.5px;background:#fff;z-index:2;pointer-events:none}
-.handle::after{content:"";position:absolute;top:50%;left:50%;width:50px;height:50px;transform:translate(-50%,-50%);border-radius:50%;background:var(--ochre);box-shadow:0 8px 20px rgba(0,0,0,.5);
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23101522' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E");background-size:24px;background-repeat:no-repeat;background-position:center}
+.handle{position:absolute;top:0;bottom:0;left:var(--pos,100%);width:3px;margin-left:-1.5px;background:var(--parch);z-index:2;pointer-events:none}
+.handle::after{content:"";position:absolute;top:50%;left:50%;width:50px;height:50px;transform:translate(-50%,-50%);border-radius:50%;background:var(--ochre);box-shadow:0 8px 20px rgba(0,0,0,.55);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2317120F' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M9 6l-6 6 6 6M15 6l6 6-6 6'/%3E%3C/svg%3E");background-size:24px;background-repeat:no-repeat;background-position:center}
 .tag{position:absolute;top:12px;z-index:2;pointer-events:none;font-size:12px;font-weight:700;letter-spacing:.08em;padding:6px 11px;border-radius:999px}
-.tag.l{left:12px;background:rgba(10,12,18,.75);color:#fff}
-.tag.r{right:12px;background:var(--ochre);color:#101522}
-.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-block:14px 6px}
+.tag.l{left:12px;background:rgba(15,10,8,.78);color:#fff}
+.tag.r{right:12px;background:var(--ochre);color:#17120F}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
 .hint{color:var(--muted);font-size:14px}
-.btn{font:700 15px/1 var(--f-body);padding:13px 20px;border-radius:999px;border:0;cursor:pointer;background:var(--ochre);color:#101522}
-.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--line)}
-.btn:focus-visible,.stage input:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.btn{font:700 15px/1 var(--f-body);padding:13px 20px;border-radius:999px;border:0;cursor:pointer;background:var(--ochre);color:#17120F}
+.btn:focus-visible,.stage input:focus-visible{outline:3px solid var(--parch);outline-offset:3px}
+.story{color:var(--muted);font-size:15.5px;max-width:70ch;margin:0}
 
-section{padding-block:44px}
-h2{font-family:var(--f-display);font-weight:600;font-size:clamp(22px,3.4vw,34px);margin:0 0 20px;text-wrap:balance}
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;display:grid;grid-template-rows:auto 1fr}
-.card .pic{aspect-ratio:3/2;max-width:100%;background:var(--navy);overflow:hidden}
-.card .pic canvas,.card .pic img{width:100%;height:100%;object-fit:cover;display:block}
-.card .body{padding:18px 18px 20px;display:grid;gap:8px;align-content:start}
-.card .pos{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ochre)}
-.card h3{font-family:var(--f-display);font-weight:600;font-size:19px;margin:0;line-height:1.15}
-.card .yrs{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums}
-.card p{margin:0;font-size:15.5px}
-@media (max-width:860px){.cards{grid-template-columns:minmax(0,1fr)}}
-
-.notes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
-.notes div{border-top:3px solid var(--ochre);padding-top:12px;display:grid;gap:4px}
-.notes b{font-family:var(--f-display);font-weight:600;font-size:16px}
-.notes p{margin:0;color:var(--muted);font-size:15px}
-@media (max-width:860px){.notes{grid-template-columns:minmax(0,1fr)}}
+.pal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.sw{display:grid;gap:8px}
+.sw i{display:block;aspect-ratio:1/1;max-width:100%;border-radius:12px;border:1px solid var(--line)}
+.sw b{font-size:15px}
+.sw span{color:var(--muted);font-size:13.5px;line-height:1.35}
+.sw code{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums}
+@media (max-width:720px){.pal{grid-template-columns:minmax(0,1fr);gap:10px}.sw{grid-template-columns:52px minmax(0,1fr);column-gap:14px;row-gap:2px;align-items:center}.sw i{grid-row:1/span 3;width:52px}.sw>*:not(i){grid-column:2}}
+.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:8px}
+.facts div{border-top:3px solid var(--ochre);padding-top:12px;display:grid;gap:4px}
+.facts b{font-family:var(--f-display);font-size:22px}
+.facts p{margin:0;color:var(--muted);font-size:15px}
+@media (max-width:720px){.facts{grid-template-columns:minmax(0,1fr)}}
 footer{padding-block:28px calc(28px + env(safe-area-inset-bottom,0px));border-top:1px solid var(--line);color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 footer b{color:var(--ink)}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
@@ -68,124 +67,75 @@ footer b{color:var(--ink)}
 <div class="wrap">
   <header>
     <span class="kicker">Solano Community College · Mural concept</span>
-    <h1>Minds That <span>Changed History</span></h1>
-    <p class="sub">Three portraits for the three panels above Student Information. Drag the slider to see the wall today and with the mural.</p>
+    <h1>Minds and <em>Moments</em> That Changed History</h1>
+    <p class="sub">Six painted panels on the two walls above Student Information and Counseling. One side shows the people, the other shows the moments that made them history.</p>
   </header>
 
-  <div class="stage" id="stage" style="--pos:100%">
-    <img id="before" alt="The three wood panels as they look today" src="wall.jpg">
-    <canvas class="after" id="after" aria-label="The same wall with the three portrait murals"></canvas>
-    <div class="handle"></div>
-    <span class="tag l">TODAY</span><span class="tag r">WITH MURAL</span>
-    <input type="range" id="range" min="0" max="100" value="100" aria-label="Reveal the mural">
-  </div>
-  <div class="controls">
-    <span class="hint">← Swipe to reveal →</span>
-    <button class="btn" type="button" id="play">Reveal the mural</button>
-  </div>
-
-  <section>
-    <h2>The story on each panel</h2>
-    <div class="cards" id="cards"></div>
+  <section class="side" id="s1">
+    <div class="side-head"><div><span>Side 1 · Student Information</span><h2>The Minds</h2></div></div>
+    <div class="stage" style="aspect-ratio:4/3">
+      <img src="right-before.jpg" alt="Student Information wall today: three bare wood panels">
+      <img class="after" src="right-after.jpg" alt="Same wall with portraits of Carter G. Woodson, Ida B. Wells and W.E.B. Du Bois">
+      <div class="handle"></div>
+      <span class="tag l">TODAY</span><span class="tag r">WITH MURAL</span>
+      <input type="range" min="0" max="100" value="100" aria-label="Reveal the mural on side 1">
+    </div>
+    <div class="row"><span class="hint">← Swipe to reveal →</span><button class="btn" type="button">Reveal</button></div>
+    <p class="story">Carter G. Woodson, Ida B. Wells and W.E.B. Du Bois. Each portrait has a caption plaque that says in one line what they gave the world.</p>
   </section>
 
-  <section style="padding-top:0">
-    <h2>How it gets made</h2>
-    <div class="notes">
-      <div><b>Removable panels</b><p>Painted on rigid panels cut to each frame, so the acoustic wood stays untouched and the art can move with the college.</p></div>
-      <div><b>One series, one palette</b><p>Warm ochre, deep navy and cream tie the three portraits together, with a caption plaque in the same corner of each.</p></div>
-      <div><b>Built to last</b><p>Professional acrylics with a UV-protective clear coat. Sketch approval before any paint goes on.</p></div>
+  <section class="side" id="s2">
+    <div class="side-head"><div><span>Side 2 · Counseling</span><h2>The Moments</h2></div></div>
+    <div class="stage" style="aspect-ratio:3/1">
+      <img src="left-before.jpg" alt="Counseling wall today: three bare wood panels" style="object-position:50% 70%">
+      <img class="after" src="left-after.jpg" alt="Same wall with three scenes: Paris 1900, Washington 1913 and a 1926 classroom">
+      <div class="handle"></div>
+      <span class="tag l">TODAY</span><span class="tag r">WITH MURAL</span>
+      <input type="range" min="0" max="100" value="100" aria-label="Reveal the mural on side 2">
+    </div>
+    <div class="row"><span class="hint">← Swipe to reveal →</span><button class="btn" type="button">Reveal</button></div>
+    <p class="story">Read left to right like a timeline: 1900, Du Bois shows Black America in data at the Paris World's Fair. 1913, Ida B. Wells refuses to march at the back of the suffrage parade. 1926, Carter G. Woodson starts the week that became Black History Month.</p>
+  </section>
+
+  <section>
+    <div class="side-head" style="margin-bottom:16px"><div><span>Color palette</span><h2>Warm, aged and dignified</h2></div></div>
+    <div class="pal">
+      <div class="sw"><i style="background:var(--ochre)"></i><b>Ochre Gold</b><span>Light, hope and the glow around every figure</span><code>#D69045</code></div>
+      <div class="sw"><i style="background:var(--sienna)"></i><b>Burnt Sienna</b><span>Skin tones, wood and old book bindings</span><code>#8E5129</code></div>
+      <div class="sw"><i style="background:var(--umber)"></i><b>Dark Umber</b><span>Suits, shadows and depth</span><code>#34251E</code></div>
+      <div class="sw"><i style="background:var(--parch)"></i><b>Parchment</b><span>Caption plaques, banners and paper</span><code>#E8D2B0</code></div>
+      <div class="sw"><i style="background:var(--indigo)"></i><b>Indigo Blue</b><span>Sky strokes that cool and balance the warm tones</span><code>#3D5A86</code></div>
+    </div>
+    <p class="story" style="margin-top:16px">Painterly brushstrokes with a vintage, sepia-warm feel, like an old photograph come to life. The same palette and plaque style run across all six panels, so both walls read as one series and sit naturally next to the maple wood and cream walls of the building.</p>
+  </section>
+
+  <section style="padding-top:8px">
+    <div class="side-head" style="margin-bottom:12px"><div><span>Scope</span><h2>What we would paint</h2></div></div>
+    <div class="facts">
+      <div><b>6 panels</b><p>Three portraits and three historical scenes, about 11 × 11 ft each.</p></div>
+      <div><b>Removable</b><p>Painted on rigid panels cut to each frame, so the acoustic wood stays untouched.</p></div>
+      <div><b>Built to last</b><p>Professional acrylics with a UV-protective clear coat. Sketch approval before painting.</p></div>
     </div>
   </section>
 
   <footer>
-    <span><b>OHRA</b> mural studio · concept sketch</span>
-    <span>(916) 955-0484 · Instagram @vitnasmur</span>
+    <span><b>OHRA</b> mural studio · concept</span>
+    <span>(916) 955-0484 · Instagram @vitnasmur · TikTok @vvitnass</span>
   </footer>
 </div>
-
 <script>
 (function(){
 "use strict";
-/* Panels measured on the 2016×1512 original photo. Mural images: p1.jpg, p2.jpg, p3.jpg next to this page. */
-var BASE_W=2016;
-var PANELS=[
-  {img:"p1.jpg",pos:"Left panel",name:"W.E.B. Du Bois",yrs:"1868 – 1963",
-   txt:"Sociologist and historian. The first African American to earn a PhD from Harvard. Co-founded the NAACP and wrote The Souls of Black Folk.",
-   rect:{x:-90,y:778,w:950,h:650},col:"#1B2A4A"},
-  {img:"p2.jpg",pos:"Middle panel",name:"Carter G. Woodson",yrs:"1875 – 1950",
-   txt:"The son of formerly enslaved parents, he worked in coal mines and started high school at 20. Earned a Harvard PhD and started the week that became Black History Month.",
-   rect:{x:935,y:772,w:592,h:500},col:"#3A2418"},
-  {img:"p3.jpg",pos:"Right panel",name:"Ida B. Wells",yrs:"1862 – 1931",
-   txt:"Born into slavery, she became a fearless investigative journalist and co-founded the NAACP. She used facts to fight injustice.",
-   rect:{x:1548,y:740,w:420,h:440},col:"#22303A"}
-];
-var railY=function(x){return 1450-0.18*x};
-var topY=function(x){return 801-0.0225*x};
-
-function placeholder(p,w,h){
-  var c=document.createElement("canvas");c.width=w;c.height=h;var g=c.getContext("2d");
-  g.fillStyle=p.col;g.fillRect(0,0,w,h);
-  g.fillStyle="#E8A93A";g.beginPath();g.arc(w*.32,h*.46,h*.3,0,7);g.fill();
-  g.fillStyle="#F3EEE3";g.beginPath();g.arc(w*.32,h*.4,h*.13,0,7);g.fill();
-  g.beginPath();g.ellipse(w*.32,h*.78,h*.22,h*.16,0,Math.PI,0);g.fill();
-  g.fillStyle="rgba(243,238,227,.92)";g.fillRect(w*.6,h*.68,w*.36,h*.24);
-  g.fillStyle="#101522";var fs=Math.max(10,h*.055);g.font="800 "+fs+"px Unbounded, sans-serif";g.textBaseline="top";
-  g.fillText(p.name.toUpperCase(),w*.62,h*.71,w*.33);
-  g.font="500 "+fs*.75+"px Manrope, sans-serif";g.fillText(p.yrs,w*.62,h*.71+fs*1.4,w*.33);
-  return c;
-}
-function loadImg(src){return new Promise(function(res){var i=new Image();i.onload=function(){res(i)};i.onerror=function(){res(null)};i.src=src})}
-
-var before=document.getElementById("before"),after=document.getElementById("after");
-function build(){
-  var W=before.naturalWidth,H=before.naturalHeight,s=W/BASE_W;
-  after.width=W;after.height=H;var g=after.getContext("2d");g.drawImage(before,0,0);
-  var photo=g.getImageData(0,0,W,H),pd=photo.data;
-  var art=document.createElement("canvas");art.width=W;art.height=H;var a=art.getContext("2d");
-  return Promise.all(PANELS.map(function(p){return loadImg(p.img)})).then(function(imgs){
-    PANELS.forEach(function(p,i){var r=p.rect,x=r.x*s,y=r.y*s,w=r.w*s,h=r.h*s,src=imgs[i]||placeholder(p,Math.round(w),Math.round(h));
-      var sw=src.naturalWidth||src.width,sh=src.naturalHeight||src.height,k=Math.max(w/sw,h/sh),dw=sw*k,dh=sh*k;
-      a.save();a.beginPath();a.rect(x,y,w,h);a.clip();a.drawImage(src,x+(w-dw)/2,y+(h-dh)/2,dw,dh);a.restore();
-      p.thumb=src;});
-    var ad=a.getImageData(0,0,W,H).data;
-    for(var py=0;py<H;py++){for(var px=0;px<W;px++){var o=(py*W+px)*4;if(ad[o+3]===0)continue;
-      var ox=px/s,oy=py/s;
-      if(oy>railY(ox)-4||oy<topY(ox)+2)continue;
-      var r=pd[o],gg=pd[o+1],b=pd[o+2];
-      if(ox>1540){if(ox<1557+(oy-800)*0.115||ox>1952)continue}   /* right panel: geometric edges, its light corner fails the colour test */
-      else if(r-b<21||r>240)continue;
-      var L=(r+gg+b)/3,f=Math.pow(L/132,.6);if(f<.55)f=.55;if(f>1.25)f=1.25;
-      pd[o]=Math.min(255,ad[o]*f*.94+r*.06);pd[o+1]=Math.min(255,ad[o+1]*f*.94+gg*.06);pd[o+2]=Math.min(255,ad[o+2]*f*.94+b*.06);}}
-    g.putImageData(photo,0,0);
-    renderCards();
-  });
-}
-function renderCards(){
-  var box=document.getElementById("cards");box.innerHTML="";
-  PANELS.forEach(function(p){var c=document.createElement("article");c.className="card";
-    var pic=document.createElement("div");pic.className="pic";
-    if(p.thumb&&p.thumb.tagName==="IMG"){var im=document.createElement("img");im.src=p.img;im.alt="Mural sketch: "+p.name;pic.appendChild(im)}
-    else{var cv=placeholder(p,600,400);pic.appendChild(cv)}
-    var body=document.createElement("div");body.className="body";
-    body.innerHTML='<span class="pos"></span><h3></h3><span class="yrs"></span><p></p>';
-    body.children[0].textContent=p.pos;body.children[1].textContent=p.name;body.children[2].textContent=p.yrs;body.children[3].textContent=p.txt;
-    c.appendChild(pic);c.appendChild(body);box.appendChild(c)});
-}
-
-var stage=document.getElementById("stage"),range=document.getElementById("range");
-function setPos(v){stage.style.setProperty("--pos",v+"%");range.value=v}
-range.addEventListener("input",function(){setPos(range.value)});
-var anim=null;
-function sweep(to){cancelAnimationFrame(anim);var from=+range.value,t0=performance.now(),d=1400;
-  if(matchMedia("(prefers-reduced-motion: reduce)").matches){setPos(to);return}
-  (function step(t){var k=Math.min(1,(t-t0)/d);k=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;setPos(from+(to-from)*k);if(k<1)anim=requestAnimationFrame(step)})(t0)}
-var shown=false;
-document.getElementById("play").addEventListener("click",function(e){shown=!shown;sweep(shown?0:100);e.target.textContent=shown?"Show the wall today":"Reveal the mural"});
-
-function start(){var go=function(){build().then(function(){setTimeout(function(){sweep(50)},500)})};
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(go);else go()}
-if(before.complete&&before.naturalWidth)start();else before.addEventListener("load",start);
+var reduce=matchMedia("(prefers-reduced-motion: reduce)").matches;
+document.querySelectorAll(".side").forEach(function(sec){
+  var stage=sec.querySelector(".stage"),range=stage.querySelector("input"),btn=sec.querySelector(".btn"),anim=null,open=false,played=false;
+  function set(v){stage.style.setProperty("--pos",v+"%");range.value=v}
+  function sweep(to){cancelAnimationFrame(anim);if(reduce){set(to);return}var from=+range.value,t0=performance.now(),d=1600;
+    (function step(t){var k=Math.min(1,(t-t0)/d);k=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;set(from+(to-from)*k);if(k<1)anim=requestAnimationFrame(step)})(t0)}
+  range.addEventListener("input",function(){cancelAnimationFrame(anim);set(range.value);played=true});
+  btn.addEventListener("click",function(){open=+range.value>50;sweep(open?0:100);btn.textContent=open?"Show today":"Reveal";played=true});
+  if("IntersectionObserver" in window){new IntersectionObserver(function(es,o){es.forEach(function(e){if(e.isIntersecting&&!played){played=true;setTimeout(function(){sweep(0);btn.textContent="Show today"},400);o.disconnect()}})},{threshold:.55}).observe(stage)}
+});
 })();
 </script>
 </body>
