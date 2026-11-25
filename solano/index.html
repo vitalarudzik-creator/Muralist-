@@ -51,6 +51,10 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3.6vw,38px)
 .close a{display:block;border-radius:14px;overflow:hidden;box-shadow:0 24px 50px -28px rgba(0,0,0,.9)}
 .close img{display:block;width:100%;height:auto;max-width:100%}
 .close a:focus-visible{outline:3px solid var(--parch);outline-offset:3px}
+.qr-wrap{position:relative}
+.close .qr{display:grid;position:absolute;left:3%;bottom:4%;width:clamp(76px,15%,150px);background:#F4EADB;border-radius:10px;padding:6px 6px 5px;display:grid;gap:3px;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.45)!important}
+.close .qr img{width:100%;height:auto;display:block}
+.qr span{display:block;font-size:clamp(8px,1.1vw,11px);font-weight:700;line-height:1.15;color:#17120F;text-align:center}
 .pal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
 .sw{display:grid;gap:8px}
 .sw i{display:block;aspect-ratio:1/1;max-width:100%;border-radius:12px;border:1px solid var(--line)}
@@ -89,7 +93,10 @@ footer b{color:var(--ink)}
     <p class="story">Carter G. Woodson, Ida B. Wells and W.E.B. Du Bois. Each portrait has a caption plaque that says in one line what they gave the world.</p>
     <div class="close">
       <span class="close-label">Close-up · tap to open full size</span>
-      <a href="close-woodson.jpg" target="_blank" rel="noopener"><img src="close-woodson.jpg" alt="Portrait panel: Carter G. Woodson with history books and a calendar" loading="lazy"></a>
+      <div class="qr-wrap">
+        <a href="close-woodson.jpg" target="_blank" rel="noopener"><img src="close-woodson.jpg" alt="Portrait panel: Carter G. Woodson with history books and a calendar" loading="lazy"></a>
+        <a class="qr" href="woodson/"><img src="qr-woodson.svg" alt="QR code linking to the full story of Carter G. Woodson"><span>Scan for his full story</span></a>
+      </div>
       <a href="close-wells.jpg" target="_blank" rel="noopener"><img src="close-wells.jpg" alt="Portrait panel: Ida B. Wells with newspapers and a printing press" loading="lazy"></a>
       <a href="close-dubois.jpg" target="_blank" rel="noopener"><img src="close-dubois.jpg" alt="Portrait panel: W.E.B. Du Bois with books and a university hall" loading="lazy"></a>
     </div>
