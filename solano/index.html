@@ -32,7 +32,10 @@ section{padding-block:36px}
 h2{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3.6vw,38px);margin:2px 0 0;line-height:1.1;text-wrap:balance}
 .stage{position:relative;border-radius:16px;overflow:hidden;background:#000;user-select:none;touch-action:pan-y;box-shadow:0 30px 60px -30px rgba(0,0,0,.9);max-width:100%}
 .stage img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.stage .after{clip-path:inset(0 0 0 var(--pos,100%))}
+.stage .after,.after-layer{clip-path:inset(0 0 0 var(--pos,100%))}
+.after-layer{position:absolute;inset:0}
+.wall-qr{position:absolute;left:2.4%;top:85.6%;width:3.6%;background:#F4EADB;padding:.3%;border-radius:2px;pointer-events:none;z-index:1}
+.stage .wall-qr img{position:static;width:100%;height:auto;display:block}
 .stage input{position:absolute;inset:0;width:100%;height:100%;opacity:0;margin:0;cursor:ew-resize;z-index:3}
 .handle{position:absolute;top:0;bottom:0;left:var(--pos,100%);width:3px;margin-left:-1.5px;background:var(--parch);z-index:2;pointer-events:none}
 .handle::after{content:"";position:absolute;top:50%;left:50%;width:50px;height:50px;transform:translate(-50%,-50%);border-radius:50%;background:var(--ochre);box-shadow:0 8px 20px rgba(0,0,0,.55);
@@ -52,9 +55,8 @@ h2{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3.6vw,38px)
 .close img{display:block;width:100%;height:auto;max-width:100%}
 .close a:focus-visible{outline:3px solid var(--parch);outline-offset:3px}
 .qr-wrap{position:relative}
-.close .qr{display:grid;position:absolute;left:3%;bottom:4%;width:clamp(76px,15%,150px);background:#F4EADB;border-radius:10px;padding:6px 6px 5px;display:grid;gap:3px;text-decoration:none;box-shadow:0 10px 24px rgba(0,0,0,.45)!important}
+.close .qr{display:block;position:absolute;left:2.5%;bottom:4%;width:clamp(42px,7%,72px);background:#F4EADB;border-radius:4px;padding:3px;text-decoration:none;box-shadow:0 6px 14px rgba(0,0,0,.4)!important}
 .close .qr img{width:100%;height:auto;display:block}
-.qr span{display:block;font-size:clamp(8px,1.1vw,11px);font-weight:700;line-height:1.15;color:#17120F;text-align:center}
 .pal{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
 .sw{display:grid;gap:8px}
 .sw i{display:block;aspect-ratio:1/1;max-width:100%;border-radius:12px;border:1px solid var(--line)}
@@ -84,7 +86,7 @@ footer b{color:var(--ink)}
     <div class="side-head"><div><span>Side 1 · Student Information</span><h2>The Minds</h2></div></div>
     <div class="stage" style="aspect-ratio:4/3">
       <img src="right-before.jpg" alt="Student Information wall today: three bare wood panels">
-      <img class="after" src="right-after.jpg" alt="Same wall with portraits of Carter G. Woodson, Ida B. Wells and W.E.B. Du Bois">
+      <div class="after-layer"><img src="right-after.jpg" alt="Same wall with portraits of Carter G. Woodson, Ida B. Wells and W.E.B. Du Bois"><span class="wall-qr"><img src="qr-woodson.svg" alt=""></span></div>
       <div class="handle"></div>
       <span class="tag l">TODAY</span><span class="tag r">WITH MURAL</span>
       <input type="range" min="0" max="100" value="100" aria-label="Reveal the mural on side 1">
@@ -95,7 +97,7 @@ footer b{color:var(--ink)}
       <span class="close-label">Close-up · tap to open full size</span>
       <div class="qr-wrap">
         <a href="close-woodson.jpg" target="_blank" rel="noopener"><img src="close-woodson.jpg" alt="Portrait panel: Carter G. Woodson with history books and a calendar" loading="lazy"></a>
-        <a class="qr" href="woodson/"><img src="qr-woodson.svg" alt="QR code linking to the full story of Carter G. Woodson"><span>Scan for his full story</span></a>
+        <a class="qr" href="woodson/"><img src="qr-woodson.svg" alt="QR code linking to the full story of Carter G. Woodson"></a>
       </div>
       <a href="close-wells.jpg" target="_blank" rel="noopener"><img src="close-wells.jpg" alt="Portrait panel: Ida B. Wells with newspapers and a printing press" loading="lazy"></a>
       <a href="close-dubois.jpg" target="_blank" rel="noopener"><img src="close-dubois.jpg" alt="Portrait panel: W.E.B. Du Bois with books and a university hall" loading="lazy"></a>
